@@ -1,0 +1,16 @@
+name: WonderfulLife CI
+on: { push: { branches: [main] }, pull_request: { branches: [main] } }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      OPENAI_MODEL: gpt-4.1-mini
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm install
+      - run: npm run build
