@@ -1,0 +1,29 @@
+import { createContentAction } from "@/lib/actions/content";
+
+export default async function StudioPage({ searchParams }: { searchParams: Promise<{ message?: string }> }) {
+  const params = await searchParams;
+  return (
+    <main className="mx-auto max-w-4xl px-5 py-16">
+      <p className="text-center font-black uppercase tracking-[.13em] text-forest">Studio</p>
+      <h1 className="mb-8 mt-3 text-center font-serif text-5xl">Create Video</h1>
+      {params.message ? <div className="mb-6 rounded-2xl bg-sage p-4 text-center font-bold text-forest">{params.message}</div> : null}
+      <form action={createContentAction} className="rounded-[2rem] bg-white p-8 shadow-wl">
+        <input type="hidden" name="type" value="video" />
+        <input name="title" placeholder="Title" className="mb-4 h-14 w-full rounded-2xl border px-5" required />
+        <input name="slug" placeholder="Slug optional" className="mb-4 h-14 w-full rounded-2xl border px-5" />
+        <input name="category" placeholder="Category" className="mb-4 h-14 w-full rounded-2xl border px-5" />
+        <input name="image_url" placeholder="Image URL" className="mb-4 h-14 w-full rounded-2xl border px-5" />
+        <input name="video_url" placeholder="Video URL" className="mb-4 h-14 w-full rounded-2xl border px-5" />
+        <input name="tags" placeholder="Tags comma separated" className="mb-4 h-14 w-full rounded-2xl border px-5" />
+        <textarea name="excerpt" placeholder="Excerpt" rows={3} className="mb-4 w-full rounded-2xl border p-5" />
+        <textarea name="body" placeholder="Body" rows={10} className="mb-4 w-full rounded-2xl border p-5" />
+        <div className="mb-6 grid gap-4 md:grid-cols-3">
+          <select name="status" className="h-14 rounded-2xl border px-5"><option>draft</option><option>published</option></select>
+          <input name="reading_minutes" type="number" defaultValue={5} className="h-14 rounded-2xl border px-5" />
+          <label className="flex items-center gap-2 font-bold"><input type="checkbox" name="featured" /> Featured</label>
+        </div>
+        <button className="h-14 rounded-2xl bg-forest px-8 font-black text-white">Save</button>
+      </form>
+    </main>
+  );
+}

@@ -1,0 +1,11 @@
+export default function MediaPage() {
+  return (
+    <main className="mx-auto max-w-5xl px-5 py-16">
+      <section className="rounded-[2rem] bg-white p-10 shadow-wl">
+        <p className="font-black uppercase tracking-[.13em] text-forest">Studio</p>
+        <h1 className="mt-3 font-serif text-5xl">Media Library</h1>
+        <p className="mt-4 text-muted">Use Supabase Storage for media uploads. Paste public URLs into content fields.</p>
+      </section>
+    </main>
+  );
+}
