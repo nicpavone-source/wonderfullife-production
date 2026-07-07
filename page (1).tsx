@@ -1,1 +1,0 @@
-@tailwind base;@tailwind components;@tailwind utilities;body{background:#FAF9F6;color:#25302A}button,input,select,textarea{font-family:inherit}.prose p{margin-bottom:1rem}
