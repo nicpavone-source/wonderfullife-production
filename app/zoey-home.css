@@ -824,6 +824,7 @@
 
 .wl-hero-image-desktop {
   display: block;
+   object-position: center 1%;
 }
 
 .wl-hero-image-mobile {
