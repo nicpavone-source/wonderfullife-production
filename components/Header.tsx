@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { signOutAction } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/client";
@@ -258,6 +258,7 @@ function getInitials(name: string) {
 
 export default function Header() {
   const pathname = usePathname();
+  const mobileMenuRef = useRef<HTMLDetailsElement | null>(null);
 
   const [member, setMember] =
     useState<Member | null>(null);
@@ -324,6 +325,12 @@ export default function Header() {
       subscription.subscription.unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (mobileMenuRef.current) {
+      mobileMenuRef.current.open = false;
+    }
+  }, [pathname]);
 
   return (
     <header className="site-header">
@@ -714,7 +721,7 @@ export default function Header() {
       <div className="nav">
         {/* NATIVE MOBILE HAMBURGER */}
 
-        <details className="mobile-nav-details">
+        <details ref={mobileMenuRef} className="mobile-nav-details">
           <summary
             className="mobile-nav-summary"
             aria-label="Navigation menu"
@@ -750,6 +757,11 @@ export default function Header() {
                         ? "join-team"
                         : ""
                     }`}
+                    onClick={() => {
+                      if (mobileMenuRef.current) {
+                        mobileMenuRef.current.open = false;
+                      }
+                    }}
                   >
                     <Icon size={19} />
                     <span>{label}</span>
