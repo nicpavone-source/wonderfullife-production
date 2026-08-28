@@ -546,23 +546,6 @@ export default function ContactPage() {
               <div className="wl-contact-people">
                 <div className="wl-contact-person">
                   <p className="wl-contact-person-label">
-                    WonderfulLife Team
-                  </p>
-
-                  <p className="wl-contact-person-name">
-                    Nick
-                  </p>
-
-                  <a
-                    href="mailto:nick@wonderful-life.ca"
-                    className="wl-contact-email"
-                  >
-                    nick@wonderful-life.ca
-                  </a>
-                </div>
-
-                <div className="wl-contact-person">
-                  <p className="wl-contact-person-label">
                     WonderfulLife Guide
                   </p>
 
