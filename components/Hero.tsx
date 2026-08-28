@@ -194,7 +194,7 @@ export default function Hero() {
 
         <div className="wl-hero-actions">
           <Link
-            href="/articles"
+            href="/wellness"
             className="wl-hero-button wl-hero-button-primary"
           >
             <LeafIcon />
