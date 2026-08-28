@@ -110,7 +110,7 @@ export default async function VideosPage({
         .videos-hero {
           position: relative;
           width: 100%;
-          aspect-ratio: 3.15 / 1;
+          aspect-ratio: 2.1 / 1;
           overflow: hidden;
           background: #eef4f7;
         }
@@ -519,7 +519,7 @@ export default async function VideosPage({
           sizes="100vw"
           style={{
             objectFit: "cover",
-            objectPosition: "left center",
+            objectPosition: "center 30%",
           }}
         />
       </section>

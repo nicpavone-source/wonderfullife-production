@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import SiteChrome from "@/components/SiteChrome";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
 import BackToTop from "@/components/BackToTop";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "WonderfulLife.ca",
@@ -25,6 +26,8 @@ export default function RootLayout({
         <BackToTop />
 
         <AnalyticsScripts />
+
+        <Analytics />
       </body>
     </html>
   );
