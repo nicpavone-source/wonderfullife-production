@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { updateContentAction } from "@/lib/actions/content";
 import { createClient } from "@/lib/supabase/client";
-
 type MediaAsset = {
   id: number;
   title: string;
@@ -252,6 +251,7 @@ function parseRecipeBody(body: string | null) {
 export default function EditRecipeStudioPage() {
   const params = useParams<{ id: string }>();
   const recipeId = Number(params.id);
+  const router = useRouter();
 
   const supabase = useMemo(() => createClient(), []);
 
