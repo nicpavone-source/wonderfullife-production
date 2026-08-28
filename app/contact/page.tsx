@@ -424,7 +424,7 @@ export default function ContactPage() {
 
             <form
               className="wl-contact-form"
-              action="mailto:nick@wonderfullife.ca"
+              action="mailto:nick@wonderful-life.ca"
               method="post"
               encType="text/plain"
             >
@@ -554,10 +554,10 @@ export default function ContactPage() {
                   </p>
 
                   <a
-                    href="mailto:nick@wonderfullife.ca"
+                    href="mailto:nick@wonderful-life.ca"
                     className="wl-contact-email"
                   >
-                    nick@wonderfullife.ca
+                    nick@wonderful-life.ca
                   </a>
                 </div>
 
@@ -571,10 +571,10 @@ export default function ContactPage() {
                   </p>
 
                   <a
-                    href="mailto:zoey@wonderfullife.ca"
+                    href="mailto:zoey@wonderful-life.ca"
                     className="wl-contact-email"
                   >
-                    zoey@wonderfullife.ca
+                    zoey@wonderful-life.ca
                   </a>
                 </div>
               </div>
