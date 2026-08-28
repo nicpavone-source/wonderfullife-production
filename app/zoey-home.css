@@ -1,0 +1,998 @@
+/* =========================================================
+   WonderfulLife Homepage
+   Living Vancouver Harbour Experience
+   ========================================================= */
+
+.wl-home {
+  min-height: 100vh;
+  background: #f7f8f4;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.wl-hero {
+  position: relative;
+  min-height: calc(100vh - 88px);
+  overflow: hidden;
+  isolation: isolate;
+  background: #dfe8df;
+}
+
+
+/* =========================================================
+   LIVING PHOTOGRAPH
+   ========================================================= */
+
+.wl-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.wl-hero-image {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center center;
+
+  transform:
+    scale(1.02)
+    translate3d(0, 0, 0);
+
+  animation:
+    wlHeroBreathing
+    8s
+    ease-in-out
+    infinite
+    alternate;
+
+  will-change:
+    transform,
+    filter;
+}
+
+
+/* =========================================================
+   MOVING DAYLIGHT
+   ========================================================= */
+
+.wl-hero-media::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 28% 17%,
+      rgba(255, 255, 255, 0.34) 0%,
+      rgba(255, 255, 255, 0.18) 20%,
+      rgba(255, 255, 255, 0.06) 36%,
+      rgba(255, 255, 255, 0) 58%
+    ),
+    linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0) 18%,
+      rgba(255, 255, 255, 0.10) 34%,
+      rgba(255, 255, 255, 0.28) 48%,
+      rgba(255, 255, 255, 0.12) 60%,
+      rgba(255, 255, 255, 0) 78%
+    );
+
+  mix-blend-mode: soft-light;
+
+  animation:
+    wlMovingDaylight
+    7s
+    ease-in-out
+    infinite
+    alternate;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   GENERAL HARBOUR REFLECTION
+   ========================================================= */
+
+.wl-hero-media::after {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -2%;
+  height: 54%;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      94deg,
+      rgba(255, 255, 255, 0) 0px,
+      rgba(255, 255, 255, 0) 15px,
+      rgba(255, 255, 255, 0.12) 22px,
+      rgba(255, 255, 255, 0) 29px,
+      rgba(255, 255, 255, 0) 52px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(185, 224, 236, 0.04) 25%,
+      rgba(255, 255, 255, 0.14) 60%,
+      rgba(210, 240, 247, 0.07) 100%
+    );
+
+  opacity: 0.5;
+  filter: blur(1px);
+
+  animation:
+    wlWaterReflection
+    4.8s
+    ease-in-out
+    infinite
+    alternate;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   ADDITIONAL LIGHT
+   ========================================================= */
+
+.wl-harbour-light {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 54% 34%,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.07) 24%,
+      transparent 50%
+    );
+
+  opacity: 0.48;
+
+  animation:
+    wlHarbourLight
+    5.8s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   WATER SHIMMER
+   ========================================================= */
+
+.wl-harbour-water {
+  position: absolute;
+  left: 15%;
+  right: 22%;
+  bottom: 2%;
+  height: 38%;
+  z-index: 3;
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      87deg,
+      transparent 0px,
+      transparent 20px,
+      rgba(255, 255, 255, 0.18) 28px,
+      transparent 36px,
+      transparent 62px
+    );
+
+  mask-image:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.28) 18%,
+      rgba(0, 0, 0, 0.8) 56%,
+      rgba(0, 0, 0, 0.42) 82%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.28) 18%,
+      rgba(0, 0, 0, 0.8) 56%,
+      rgba(0, 0, 0, 0.42) 82%,
+      transparent 100%
+    );
+
+  filter: blur(1px);
+  opacity: 0.58;
+
+  animation:
+    wlWaterMovement
+    3.8s
+    ease-in-out
+    infinite
+    alternate;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* =========================================================
+   HARBOUR GLOW
+   ========================================================= */
+
+.wl-harbour-glow {
+  position: absolute;
+  left: 24%;
+  width: 52%;
+  bottom: 3%;
+  height: 28%;
+  z-index: 4;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(221, 246, 251, 0.18) 0%,
+      rgba(255, 255, 255, 0.08) 42%,
+      transparent 72%
+    );
+
+  filter: blur(8px);
+
+  animation:
+    wlHarbourGlow
+    4.8s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes wlHeroBreathing {
+  0% {
+    transform:
+      scale(1.02)
+      translate3d(0, 0, 0);
+
+    filter:
+      brightness(1)
+      saturate(1);
+  }
+
+  50% {
+    transform:
+      scale(1.05)
+      translate3d(-0.8%, -0.25%, 0);
+
+    filter:
+      brightness(1.04)
+      saturate(1.025);
+  }
+
+  100% {
+    transform:
+      scale(1.03)
+      translate3d(0.55%, 0.18%, 0);
+
+    filter:
+      brightness(1.015)
+      saturate(1.01);
+  }
+}
+
+
+@keyframes wlMovingDaylight {
+  0% {
+    transform:
+      translate3d(-7%, -1%, 0)
+      scale(1);
+
+    opacity: 0.35;
+  }
+
+  50% {
+    transform:
+      translate3d(1.5%, 0.5%, 0)
+      scale(1.03);
+
+    opacity: 0.72;
+  }
+
+  100% {
+    transform:
+      translate3d(7%, -0.5%, 0)
+      scale(1.06);
+
+    opacity: 0.42;
+  }
+}
+
+
+@keyframes wlWaterReflection {
+  0% {
+    transform:
+      translate3d(-3%, 0, 0)
+      skewX(-0.5deg);
+
+    opacity: 0.28;
+  }
+
+  50% {
+    transform:
+      translate3d(1%, -0.3%, 0)
+      skewX(0.32deg);
+
+    opacity: 0.62;
+  }
+
+  100% {
+    transform:
+      translate3d(3.2%, 0.15%, 0)
+      skewX(-0.2deg);
+
+    opacity: 0.38;
+  }
+}
+
+
+@keyframes wlHarbourLight {
+  0% {
+    transform:
+      translate3d(-2.2%, 0, 0);
+
+    opacity: 0.28;
+  }
+
+  100% {
+    transform:
+      translate3d(2.8%, -1%, 0);
+
+    opacity: 0.58;
+  }
+}
+
+
+@keyframes wlWaterMovement {
+  0% {
+    transform:
+      translate3d(-2.2%, 0, 0)
+      scaleX(1);
+
+    opacity: 0.34;
+  }
+
+  50% {
+    transform:
+      translate3d(0.8%, -0.4%, 0)
+      scaleX(1.025);
+
+    opacity: 0.68;
+  }
+
+  100% {
+    transform:
+      translate3d(2.6%, 0.2%, 0)
+      scaleX(0.985);
+
+    opacity: 0.42;
+  }
+}
+
+
+@keyframes wlHarbourGlow {
+  0% {
+    transform:
+      translate3d(-1.5%, 0, 0)
+      scale(0.95);
+
+    opacity: 0.28;
+  }
+
+  100% {
+    transform:
+      translate3d(2%, -1.2%, 0)
+      scale(1.06);
+
+    opacity: 0.55;
+  }
+}
+
+
+/* =========================================================
+   TEXT READABILITY GRADIENT
+   ========================================================= */
+
+.wl-hero-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(247, 249, 244, 0.96) 0%,
+      rgba(247, 249, 244, 0.90) 16%,
+      rgba(247, 249, 244, 0.62) 28%,
+      rgba(247, 249, 244, 0.28) 38%,
+      rgba(247, 249, 244, 0.10) 48%,
+      rgba(247, 249, 244, 0.02) 58%,
+      rgba(247, 249, 244, 0) 68%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 55%,
+      rgba(20, 40, 30, 0.05) 100%
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.wl-hero-content {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(100%, 1440px);
+  min-height: calc(100vh - 88px);
+  margin: 0 auto;
+  padding: 48px 7vw 64px;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.wl-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  color: #4d6755;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.wl-hero-eyebrow span {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: #6e8b74;
+}
+
+
+/* =========================================================
+   HEADLINE
+   ========================================================= */
+
+.wl-hero-title {
+  max-width: 660px;
+  margin: 0;
+  color: #24382b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, 5vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.99;
+  text-wrap: balance;
+}
+
+.wl-hero-title em {
+  color: #68836f;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.wl-hero-description {
+  max-width: 590px;
+  margin: 25px 0 0;
+  color: #536158;
+  font-size: clamp(1rem, 1.25vw, 1.14rem);
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.wl-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.wl-hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.wl-hero-button:hover {
+  transform: translateY(-2px);
+}
+
+.wl-hero-button:focus-visible {
+  outline: 3px solid rgba(82, 118, 92, 0.28);
+  outline-offset: 4px;
+}
+
+.wl-hero-button-primary {
+  color: #ffffff;
+  background: #536f5b;
+  border-color: #536f5b;
+  box-shadow: 0 12px 30px rgba(42, 66, 49, 0.2);
+}
+
+.wl-hero-button-primary:hover {
+  background: #425d4a;
+  border-color: #425d4a;
+  box-shadow: 0 16px 34px rgba(42, 66, 49, 0.24);
+}
+
+.wl-hero-button-light {
+  color: #304638;
+  background: rgba(255, 255, 255, 0.79);
+  border-color: rgba(73, 101, 82, 0.22);
+  box-shadow: 0 8px 24px rgba(35, 54, 40, 0.08);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.wl-hero-button-light:hover {
+  color: #24392c;
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(73, 101, 82, 0.38);
+}
+
+
+/* =========================================================
+   LARGE DESKTOPS
+   ========================================================= */
+
+@media (min-width: 1500px) {
+  .wl-hero-content {
+    padding-left:
+      max(
+        7vw,
+        calc((100vw - 1440px) / 2 + 70px)
+      );
+
+    padding-right:
+      max(
+        7vw,
+        calc((100vw - 1440px) / 2 + 70px)
+      );
+  }
+
+  .wl-hero-title {
+    max-width: 720px;
+  }
+}
+
+
+/* =========================================================
+   LAPTOPS
+   ========================================================= */
+
+@media (max-width: 1180px) {
+  .wl-hero-gradient {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(247, 249, 244, 0.94) 0%,
+        rgba(247, 249, 244, 0.84) 15%,
+        rgba(247, 249, 244, 0.54) 27%,
+        rgba(247, 249, 244, 0.23) 38%,
+        rgba(247, 249, 244, 0.07) 49%,
+        rgba(247, 249, 244, 0) 61%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06) 0%,
+        rgba(255, 255, 255, 0) 58%,
+        rgba(20, 40, 30, 0.04) 100%
+      );
+  }
+
+  .wl-hero-content {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .wl-hero-title {
+    max-width: 610px;
+  }
+
+  .wl-hero-description {
+    max-width: 520px;
+  }
+}
+
+
+/* =========================================================
+   TABLETS
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .wl-hero {
+    min-height: 820px;
+  }
+
+  .wl-hero-content {
+    justify-content: flex-start;
+    min-height: 820px;
+    padding-top: 62px;
+    padding-bottom: 330px;
+  }
+
+  .wl-hero-image {
+    object-position: 66% center;
+  }
+
+  .wl-harbour-water,
+  .wl-harbour-glow {
+    opacity: 0.3;
+  }
+
+  .wl-hero-gradient {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(247, 249, 244, 0.98) 0%,
+        rgba(247, 249, 244, 0.94) 41%,
+        rgba(247, 249, 244, 0.66) 62%,
+        rgba(247, 249, 244, 0.08) 82%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(247, 249, 244, 0.45) 0%,
+        rgba(247, 249, 244, 0.06) 100%
+      );
+  }
+
+  .wl-hero-title {
+    max-width: 640px;
+    font-size: clamp(2.7rem, 7vw, 4.5rem);
+    line-height: 1.02;
+  }
+
+  .wl-hero-description {
+    max-width: 580px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .wl-hero {
+    min-height: 760px;
+  }
+
+  .wl-hero-content {
+    min-height: 760px;
+    padding: 38px 22px 280px;
+  }
+
+  .wl-hero-image {
+    object-position: 69% center;
+  }
+
+  .wl-harbour-light,
+  .wl-harbour-water,
+  .wl-harbour-glow {
+    opacity: 0.2;
+  }
+
+  .wl-hero-gradient {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(247, 249, 244, 0.99) 0%,
+        rgba(247, 249, 244, 0.95) 46%,
+        rgba(247, 249, 244, 0.72) 65%,
+        rgba(247, 249, 244, 0.12) 86%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(247, 249, 244, 0.34) 0%,
+        rgba(247, 249, 244, 0) 100%
+      );
+  }
+
+  .wl-hero-eyebrow {
+    gap: 9px;
+    margin-bottom: 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.13em;
+  }
+
+  .wl-hero-eyebrow span {
+    width: 25px;
+  }
+
+  .wl-hero-title {
+    max-width: 100%;
+    font-size: clamp(2.45rem, 12vw, 3.7rem);
+    letter-spacing: -0.04em;
+    line-height: 1.01;
+  }
+
+  .wl-hero-description {
+    max-width: 100%;
+    margin-top: 20px;
+    font-size: 0.96rem;
+    line-height: 1.62;
+  }
+
+  .wl-hero-actions {
+    width: 100%;
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .wl-hero-button {
+    min-height: 48px;
+    padding: 0 18px;
+    font-size: 0.86rem;
+  }
+
+  .wl-hero-button-primary {
+    width: 100%;
+  }
+
+  .wl-hero-button-light {
+    flex: 1 1 calc(50% - 5px);
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .wl-hero-content {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .wl-hero-button-light {
+    flex-basis: 100%;
+  }
+}
+/* =========================================================
+   WONDERFULLIFE — FINAL MOBILE HOMEPAGE HERO
+   Approved Zoey + Vancouver composition
+   ========================================================= */
+
+.wl-hero-image-desktop {
+  display: block;
+}
+
+.wl-hero-image-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .wl-hero {
+    min-height: 820px !important;
+    background: #eef5f2;
+    overflow: hidden;
+  }
+
+  /* Correct artwork */
+  .wl-hero-image-desktop {
+    display: none !important;
+  }
+
+  .wl-hero-image-mobile {
+    display: block !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+
+  /* Remove desktop animated overlays on mobile */
+  .wl-harbour-light,
+  .wl-harbour-water,
+  .wl-harbour-glow {
+    display: none !important;
+  }
+
+  /* Soft readability fade that ends BEFORE Zoey's face */
+  .wl-hero-gradient {
+    display: block !important;
+    pointer-events: none !important;
+
+    background: linear-gradient(
+      180deg,
+      rgba(249, 251, 248, 0.98) 0%,
+      rgba(249, 251, 248, 0.95) 16%,
+      rgba(249, 251, 248, 0.84) 25%,
+      rgba(249, 251, 248, 0.58) 32%,
+      rgba(249, 251, 248, 0.24) 37%,
+      rgba(249, 251, 248, 0.06) 41%,
+      rgba(249, 251, 248, 0) 44%
+    ) !important;
+  }
+
+  /* Live content */
+  .wl-hero-content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+
+    width: 100%;
+    min-height: 820px !important;
+
+    margin: 0;
+    padding: 30px 22px 300px !important;
+  }
+
+  /* Eyebrow */
+  .wl-hero-eyebrow {
+    gap: 9px !important;
+    margin: 0 0 12px !important;
+
+    font-size: 0.66rem !important;
+    letter-spacing: 0.13em !important;
+    line-height: 1.35 !important;
+  }
+
+  .wl-hero-eyebrow span {
+    width: 25px !important;
+  }
+
+  /* Main headline */
+  .wl-hero-title {
+    max-width: 96% !important;
+
+    margin: 0 !important;
+
+    font-size: clamp(2.2rem, 10.5vw, 3.2rem) !important;
+    line-height: 1.01 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  /* Supporting copy */
+  .wl-hero-description {
+    max-width: 80% !important;
+
+    margin: 17px 0 0 !important;
+
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* CTA area */
+  .wl-hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+
+    width: auto !important;
+
+    gap: 9px !important;
+    margin-top: 20px !important;
+    transform: translate(-12px, -15px);
+  }
+
+  /* Smaller buttons to keep Zoey's face clear */
+  .wl-hero-button {
+    min-height: 42px !important;
+
+    padding: 0 16px !important;
+
+    font-size: 0.82rem !important;
+    gap: 8px !important;
+  }
+
+  .wl-hero-button svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .wl-hero-button-primary,
+  .wl-hero-button-light {
+    width: 205px !important;
+    max-width: 205px !important;
+
+    flex: none !important;
+  }
+
+  .wl-hero-button-primary {
+    box-shadow: 0 9px 22px rgba(42, 66, 49, 0.16) !important;
+  }
+
+  .wl-hero-button-light {
+    background: rgba(255, 255, 255, 0.9) !important;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .wl-hero {
+    min-height: 800px !important;
+  }
+
+  .wl-hero-content {
+    min-height: 800px !important;
+    padding: 27px 18px 290px !important;
+  }
+
+  .wl-hero-title {
+    max-width: 98% !important;
+    font-size: clamp(2.05rem, 10.6vw, 2.95rem) !important;
+  }
+
+  .wl-hero-description {
+    max-width: 84% !important;
+    font-size: 0.88rem !important;
+  }
+
+  .wl-hero-button-primary,
+  .wl-hero-button-light {
+    width: 195px !important;
+    max-width: 195px !important;
+  }
+}

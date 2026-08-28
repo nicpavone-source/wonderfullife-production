@@ -1,0 +1,2 @@
+import ContentEditor from "@/components/content-studio/ContentEditor";
+export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="wl-studio-page"><div className="wl-studio-container"><p className="wl-studio-eyebrow">WonderfulLife Content Studio</p><h1 className="wl-editor-title">Edit content</h1><ContentEditor contentId={id}/></div></main>}

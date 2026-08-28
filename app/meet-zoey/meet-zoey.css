@@ -1,0 +1,331 @@
+.meet-zoey-page {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 26px 28px 34px;
+  overflow-x: hidden;
+  background: #fbfbf9;
+  color: #1d2b23;
+}
+
+.meet-zoey-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 54%) minmax(0, 46%);
+  gap: 34px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.meet-zoey-photo {
+  width: 100%;
+  min-width: 0;
+}
+
+.meet-zoey-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 760px;
+  max-height: 980px;
+  object-fit: contain;
+  object-position: center top;
+  border-radius: 22px;
+  background: #f4f4f0;
+  box-shadow: 0 18px 48px rgba(20, 50, 32, 0.11);
+}
+
+.meet-zoey-content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0;
+}
+
+.meet-zoey-title {
+  margin: 0 0 22px;
+  text-align: center;
+}
+
+.meet-zoey-title span {
+  display: block;
+  margin-bottom: -8px;
+  color: #225b36;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(38px, 3vw, 54px);
+  line-height: 1;
+}
+
+.meet-zoey-title h1 {
+  margin: 0;
+  color: #0e4728;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(72px, 7vw, 112px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 0.86;
+}
+
+.meet-zoey-title h2 {
+  margin: 18px 0 0;
+  color: #275d3b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(25px, 2.3vw, 37px);
+  font-weight: 400;
+  line-height: 1.14;
+}
+
+.meet-zoey-title::after {
+  display: block;
+  width: 62%;
+  height: 1px;
+  margin: 20px auto 0;
+  background: #ccd7ce;
+  content: "";
+}
+
+.meet-zoey-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.meet-zoey-copy h3 {
+  margin: 0 0 8px;
+  color: #124d2c;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.meet-zoey-copy p {
+  margin: 0 0 15px;
+  color: #29342e;
+  font-size: 13.5px;
+  line-height: 1.58;
+}
+
+.meet-zoey-copy strong {
+  color: #18261f;
+  font-weight: 700;
+}
+
+.meet-zoey-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.meet-zoey-card {
+  display: flex;
+  min-height: 184px;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 11px 13px;
+  overflow: hidden;
+  border: 1px solid #e3e9e4;
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 8px 26px rgba(27, 58, 38, 0.07);
+  text-align: center;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.meet-zoey-card:hover {
+  transform: translateY(-4px);
+  border-color: #bfd1c1;
+  box-shadow: 0 15px 36px rgba(27, 58, 38, 0.13);
+}
+
+.meet-zoey-card-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 11px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eff4ec;
+  font-size: 20px;
+}
+
+.meet-zoey-card h3 {
+  margin: 0 0 8px;
+  color: #17492c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.meet-zoey-card p {
+  margin: 0;
+  color: #313b35;
+  font-size: 11.5px;
+  line-height: 1.42;
+}
+
+.meet-zoey-card-arrow {
+  display: block;
+  margin-top: auto;
+  padding-top: 10px;
+  color: #17492c;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.meet-zoey-quote {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  gap: 30px;
+  align-items: center;
+  width: 100%;
+  margin-top: 24px;
+  padding: 32px 46px;
+  border: 1px solid #e4e9e4;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7f3 100%);
+  box-shadow: 0 10px 32px rgba(27, 58, 38, 0.07);
+}
+
+.meet-zoey-quote-mark {
+  align-self: start;
+  color: #15512d;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 82px;
+  font-weight: 700;
+  line-height: 0.85;
+}
+
+.meet-zoey-quote > p {
+  margin: 0;
+  color: #26312b;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.meet-zoey-signature {
+  padding-left: 30px;
+  border-left: 1px solid #d7ded7;
+  text-align: left;
+}
+
+.meet-zoey-signature span {
+  display: block;
+  margin-bottom: 12px;
+  color: #245a34;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(29px, 2.7vw, 44px);
+  line-height: 1.13;
+}
+
+.meet-zoey-signature small {
+  color: #245a34;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: 25px;
+}
+
+@media (max-width: 1350px) {
+  .meet-zoey-page {
+    padding: 22px;
+  }
+
+  .meet-zoey-hero {
+    grid-template-columns: minmax(0, 52%) minmax(0, 48%);
+    gap: 26px;
+  }
+
+  .meet-zoey-image {
+    min-height: 700px;
+  }
+
+  .meet-zoey-copy {
+    gap: 22px;
+  }
+
+  .meet-zoey-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .meet-zoey-card {
+    min-height: 165px;
+  }
+}
+
+@media (max-width: 900px) {
+  .meet-zoey-page {
+    padding: 18px;
+  }
+
+  .meet-zoey-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .meet-zoey-image {
+    min-height: 0;
+    max-height: none;
+  }
+
+  .meet-zoey-copy {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .meet-zoey-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .meet-zoey-quote {
+    grid-template-columns: 52px 1fr;
+    padding: 30px;
+  }
+
+  .meet-zoey-signature {
+    grid-column: 1 / -1;
+    padding-top: 22px;
+    padding-left: 0;
+    border-top: 1px solid #d7ded7;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .meet-zoey-page {
+    padding: 12px;
+  }
+
+  .meet-zoey-title h1 {
+    font-size: 72px;
+  }
+
+  .meet-zoey-title h2 {
+    font-size: 25px;
+  }
+
+  .meet-zoey-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .meet-zoey-card {
+    min-height: 175px;
+  }
+
+  .meet-zoey-quote {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 24px 20px;
+  }
+
+  .meet-zoey-quote-mark {
+    font-size: 66px;
+  }
+
+  .meet-zoey-quote > p {
+    font-size: 16px;
+  }
+}
