@@ -49,9 +49,7 @@ export default function Hero() {
   useEffect(() => {
     const audio = audioRef.current;
 
-    if (!audio) {
-      return;
-    }
+    if (!audio) return;
 
     audio.volume = 0.04;
 
@@ -65,16 +63,14 @@ export default function Hero() {
     };
 
     const startAudio = async () => {
-      if (started) {
-        return;
-      }
+      if (started) return;
 
       try {
         await audio.play();
         started = true;
         removeListeners();
       } catch {
-        // Browser may require the visitor's first interaction.
+        // Browser may require a visitor interaction.
       }
     };
 
@@ -119,97 +115,133 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      className="wl-hero"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        className="wl-hero-media"
+    <>
+      {/* =====================================================
+          DESKTOP / TABLET HERO
+          ===================================================== */}
+
+      <section
+        className="wl-hero wl-hero-desktop-version"
         style={{
-          position: "absolute",
-          inset: 0,
+          position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* DESKTOP / TABLET HERO */}
-        <Image
-          src="/images/homepage-approved.png"
-          alt="Zoey overlooking Vancouver Harbour from a bright terrace"
-          fill
-          priority
-          sizes="100vw"
-          className="wl-hero-image wl-hero-image-desktop"
-        />
-
-        {/* APPROVED CLEAN MOBILE HERO */}
-        <Image
-          src="/images/homepage-mobile-zoey-approved.png"
-          alt="Zoey welcoming visitors to WonderfulLife overlooking Vancouver Harbour"
-          fill
-          priority
-          sizes="(max-width: 640px) 100vw, 1px"
-          className="wl-hero-image wl-hero-image-mobile"
-        />
-
         <div
-          className="wl-harbour-light"
-          aria-hidden="true"
-        />
+          className="wl-hero-media"
+          style={{
+            position: "absolute",
+            inset: 0,
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src="/images/homepage-approved.png"
+            alt="Zoey overlooking Vancouver Harbour from a bright terrace"
+            fill
+            priority
+            sizes="100vw"
+            className="wl-hero-image wl-hero-image-desktop"
+          />
 
-        <div
-          className="wl-harbour-water"
-          aria-hidden="true"
-        />
-
-        <div
-          className="wl-harbour-glow"
-          aria-hidden="true"
-        />
-      </div>
-
-      <div className="wl-hero-gradient" />
-
-      <div className="wl-hero-content">
-        <p className="wl-hero-eyebrow">
-          <span aria-hidden="true" />
-          Welcome to WonderfulLife
-        </p>
-
-        <h1 className="wl-hero-title">
-          Discover your
-          <br />
-          path to a healthier,
-          <br />
-          <em>happier life.</em>
-        </h1>
-
-        <p className="wl-hero-description">
-          Explore practical wellness guidance, nourishing recipes,
-          inspiring stories and supportive tools created to help you
-          become your best self.
-        </p>
-
-        <div className="wl-hero-actions">
-          <Link
-            href="/wellness"
-            className="wl-hero-button wl-hero-button-primary"
-          >
-            <LeafIcon />
-            <span>Explore Wellness</span>
-          </Link>
-
-          <Link
-            href="/meet-zoey"
-            className="wl-hero-button wl-hero-button-light"
-          >
-            <UserIcon />
-            <span>Meet Zoey</span>
-          </Link>
+          <div className="wl-harbour-light" aria-hidden="true" />
+          <div className="wl-harbour-water" aria-hidden="true" />
+          <div className="wl-harbour-glow" aria-hidden="true" />
         </div>
-      </div>
+
+        <div className="wl-hero-gradient" />
+
+        <div className="wl-hero-content">
+          <p className="wl-hero-eyebrow">
+            <span aria-hidden="true" />
+            Welcome to WonderfulLife
+          </p>
+
+          <h1 className="wl-hero-title">
+            Discover your
+            <br />
+            path to a healthier,
+            <br />
+            <em>happier life.</em>
+          </h1>
+
+          <p className="wl-hero-description">
+            Explore practical wellness guidance, nourishing recipes,
+            inspiring stories and supportive tools created to help you
+            become your best self.
+          </p>
+
+          <div className="wl-hero-actions">
+            <Link
+              href="/wellness"
+              className="wl-hero-button wl-hero-button-primary"
+            >
+              <LeafIcon />
+              <span>Explore Wellness</span>
+            </Link>
+
+            <Link
+              href="/meet-zoey"
+              className="wl-hero-button wl-hero-button-light"
+            >
+              <UserIcon />
+              <span>Meet Zoey</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          APPROVED MOBILE HOMEPAGE
+          ===================================================== */}
+
+      <section
+        className="wl-mobile-homepage-approved"
+        aria-label="WonderfulLife mobile homepage"
+      >
+        <div className="wl-mobile-homepage-image-wrap">
+          <img
+            src="/images/homepage-mobile-new.png"
+            alt="WonderfulLife mobile homepage featuring Zoey overlooking Vancouver Harbour"
+            className="wl-mobile-homepage-image"
+          />
+
+          <nav
+            className="wl-mobile-image-links"
+            aria-label="Explore WonderfulLife"
+          >
+            <Link
+              href="/wellness"
+              className="wl-mobile-image-link wl-mobile-image-link-wellness"
+              aria-label="Wellness"
+            />
+
+            <Link
+              href="/recipes"
+              className="wl-mobile-image-link wl-mobile-image-link-recipes"
+              aria-label="Recipes"
+            />
+
+            <Link
+              href="/nutrition"
+              className="wl-mobile-image-link wl-mobile-image-link-nutrition"
+              aria-label="Nutrition"
+            />
+
+            <Link
+              href="/shop"
+              className="wl-mobile-image-link wl-mobile-image-link-shop"
+              aria-label="Shop"
+            />
+
+            <Link
+              href="/meet-zoey"
+              className="wl-mobile-image-link wl-mobile-image-link-zoey"
+              aria-label="Meet Zoey"
+            />
+          </nav>
+        </div>
+      </section>
 
       <audio
         ref={audioRef}
@@ -220,6 +252,6 @@ export default function Hero() {
         playsInline
         aria-hidden="true"
       />
-    </section>
+    </>
   );
 }

@@ -997,3 +997,161 @@
     max-width: 195px !important;
   }
 }
+/* =========================================================
+   LOCKED MOBILE HERO NAVIGATION
+   Wellness / Recipes / Nutrition / Shop / Meet Zoey
+   ========================================================= */
+
+.wl-mobile-hero-actions {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .wl-hero-description,
+  .wl-hero-actions {
+    display: none;
+  }
+
+  .wl-mobile-hero-actions {
+    display: flex;
+    flex-direction: column;
+    width: min(250px, 46vw);
+    gap: 9px;
+    margin-top: 24px;
+  }
+
+  .wl-mobile-hero-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 11px 16px;
+    border: 1px solid rgba(39, 78, 56, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.93);
+    color: #173d29;
+    box-shadow: 0 5px 16px rgba(23, 61, 41, 0.08);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 800;
+    backdrop-filter: blur(7px);
+  }
+
+  .wl-mobile-hero-button svg {
+    flex: 0 0 auto;
+  }
+
+  .wl-mobile-hero-button-primary {
+    background: #4f765d;
+    border-color: #4f765d;
+    color: #ffffff;
+  }
+}
+@media (max-width: 640px) {
+  .wl-hero .wl-hero-actions {
+    display: none !important;
+  }
+
+  .wl-hero .wl-hero-description {
+    display: none !important;
+  }
+}
+@media (max-width: 640px) {
+  .wl-hero-content {
+    padding-top: 34px !important;
+  }
+
+  .wl-hero-title {
+    font-size: clamp(42px, 10.5vw, 56px) !important;
+    line-height: 0.98 !important;
+    margin-bottom: 18px !important;
+  }
+
+  .wl-mobile-hero-actions {
+    width: min(290px, 48vw) !important;
+    gap: 7px !important;
+    margin-top: 12px !important;
+  }
+
+  .wl-mobile-hero-button {
+    min-height: 44px !important;
+    padding: 8px 14px !important;
+    font-size: 15px !important;
+  }
+
+  .wl-mobile-hero-button svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+/* =========================================================
+   APPROVED MOBILE HOMEPAGE IMAGE
+   ========================================================= */
+
+.wl-mobile-homepage-approved {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .wl-hero-desktop-version {
+    display: none !important;
+  }
+
+  .wl-mobile-homepage-approved {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .wl-mobile-homepage-image-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    /*
+      The approved image already contains a mock header.
+      Pull it upward so the site's real header remains visible.
+    */
+    margin-top: -16.4vw;
+  }
+
+  .wl-mobile-homepage-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .wl-mobile-image-link {
+    position: absolute;
+    left: 4.7%;
+    width: 34%;
+    z-index: 5;
+    border-radius: 999px;
+  }
+
+  .wl-mobile-image-link-wellness {
+    top: 44.1%;
+    height: 5.1%;
+  }
+
+  .wl-mobile-image-link-recipes {
+    top: 50.5%;
+    height: 5.1%;
+  }
+
+  .wl-mobile-image-link-nutrition {
+    top: 56.8%;
+    height: 5.1%;
+  }
+
+  .wl-mobile-image-link-shop {
+    top: 63.2%;
+    height: 5.1%;
+  }
+
+  .wl-mobile-image-link-zoey {
+    top: 69.7%;
+    height: 5.1%;
+  }
+}
