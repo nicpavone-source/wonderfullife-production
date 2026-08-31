@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { createClient } from "../../lib/supabase/server";
 
@@ -24,6 +25,9 @@ type RecipeVideo = {
   created_at: string;
   updated_at: string | null;
 };
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: "Recipes | WonderfulLife.ca",
@@ -72,7 +76,20 @@ function CardImage({
   return <img src={src} alt={alt} className={className} />;
 }
 
+function shuffleItems<T>(items: T[]): T[] {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
+
 export default async function RecipesPage() {
+  noStore();
+
   const supabase = await createClient();
 
   const [recipesResult, videosResult] = await Promise.all([
@@ -82,31 +99,40 @@ export default async function RecipesPage() {
         "id,title,slug,excerpt,category,image_url,video_url,featured,created_at,updated_at"
       )
       .eq("type", "recipe")
-      .eq("status", "published")
-      .order("featured", { ascending: false })
-      .order("updated_at", { ascending: false })
-      .limit(12),
+      .eq("status", "published"),
 
     supabase
       .from("content_items")
       .select("id,title,slug,image_url,created_at,updated_at")
       .eq("type", "video")
       .eq("status", "published")
-      .in("category", ["Recipe", "Recipes"])
-      .order("featured", { ascending: false })
-      .order("updated_at", { ascending: false })
-      .limit(5),
+      .in("category", ["Recipe", "Recipes"]),
   ]);
 
   const recipes = (recipesResult.data || []) as Recipe[];
-  const recipeVideos = (videosResult.data || []) as RecipeVideo[];
+  const allRecipeVideos = (videosResult.data || []) as RecipeVideo[];
 
-  const featured =
-    recipes.find((recipe) => Boolean(recipe.featured)) || recipes[0] || null;
+  /*
+   * Every fresh visit gets a new selection from the COMPLETE recipe library.
+   * We deliberately do not restrict this to recipes marked "featured",
+   * because that would limit rotation to only the small featured subset.
+   */
+  const shuffledRecipes = shuffleItems(recipes);
+  const featured = shuffledRecipes[0] || null;
 
-  const newest = recipes
+  /*
+   * The four recipe cards below the featured recipe also rotate on every visit.
+   * They are always different from the large featured recipe.
+   */
+  const newest = shuffledRecipes
     .filter((recipe) => recipe.id !== featured?.id)
     .slice(0, 4);
+
+  /*
+   * Recipe videos rotate independently from the COMPLETE recipe-video library.
+   * The page still displays the same number of video cards as before.
+   */
+  const recipeVideos = shuffleItems(allRecipeVideos).slice(0, 5);
 
   const error =
     recipesResult.error?.message || videosResult.error?.message || null;

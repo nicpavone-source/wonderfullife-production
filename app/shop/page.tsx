@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { createClient } from "../../lib/supabase/server";
 import UniversalContentCard from "../../components/content/UniversalContentCard";
@@ -42,6 +43,8 @@ function normalizeCategory(value?: string | null) {
 export default async function ShopPage({
   searchParams,
 }: ShopPageProps) {
+  noStore();
+
   const params = await searchParams;
 
   const selectedCategory =
@@ -67,9 +70,7 @@ export default async function ShopPage({
       `
     )
     .eq("type", "product")
-    .eq("status", "published")
-    .order("featured", { ascending: false })
-    .order("updated_at", { ascending: false });
+    .eq("status", "published");
 
   const products = (data || []) as Product[];
 
@@ -119,14 +120,6 @@ export default async function ShopPage({
           height: 100%;
           object-fit: cover;
           object-position: center 18%;
-        }
-
-        .shop-hero-image-desktop {
-          display: block;
-        }
-
-        .shop-hero-image-mobile {
-          display: none;
         }
 
         /* =====================================
@@ -319,32 +312,7 @@ export default async function ShopPage({
 
         @media (max-width: 700px) {
           .shop-hero {
-            height: 300px;
-          }
-.shop-filter {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 7px;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-}
-
-.shop-filter::-webkit-scrollbar {
-  display: none;
-}
-
-.shop-filter-link {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
-          .shop-hero-image-desktop {
-            display: none;
-          }
-
-          .shop-hero-image-mobile {
-            display: block;
-            object-fit: cover;
-            object-position: center center;
+            height: clamp(300px, 62vw, 420px);
           }
 
           .shop-products {
@@ -373,22 +341,6 @@ export default async function ShopPage({
             min-height: 34px;
             padding: 0 11px;
             font-size: 10px;
-            .shop-filter {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 6px;
-  padding-bottom: 3px;
-  scrollbar-width: none;
-}
-
-.shop-filter::-webkit-scrollbar {
-  display: none;
-}
-
-.shop-filter-link {
-  flex: 0 0 auto;
-  white-space: nowrap;
-}
           }
         }
       `}</style>
@@ -407,18 +359,8 @@ export default async function ShopPage({
           width={1536}
           height={864}
           priority
-          sizes="(min-width: 701px) 100vw, 1px"
-          className="shop-hero-image shop-hero-image-desktop"
-        />
-
-        <Image
-          src="/images/wl-shop-mobile-zoey-kitchen.png"
-          alt="Zoey in the WonderfulLife kitchen overlooking Vancouver."
-          width={1536}
-          height={1024}
-          priority
-          sizes="(max-width: 700px) 100vw, 1px"
-          className="shop-hero-image shop-hero-image-mobile"
+          sizes="100vw"
+          className="shop-hero-image"
         />
       </section>
 

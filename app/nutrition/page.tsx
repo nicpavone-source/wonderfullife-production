@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { createClient } from "@/lib/supabase/server";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Nutrition | WonderfulLife",
@@ -253,11 +257,24 @@ function MixedCard({
   return <ArticleCard article={content.item} />;
 }
 
+function shuffleItems<T>(items: T[]): T[] {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
+
 /* =========================================================
    PAGE
    ========================================================= */
 
 export default async function NutritionPage() {
+  noStore();
+
   const supabase = await createClient();
 
   /* =======================================================
@@ -292,8 +309,7 @@ export default async function NutritionPage() {
     )
     .order("published_at", {
       ascending: false,
-    })
-    .limit(20);
+    });
 
   const articles =
     (articleData || []) as NutritionArticle[];
@@ -330,8 +346,7 @@ export default async function NutritionPage() {
     )
     .order("published_at", {
       ascending: false,
-    })
-    .limit(20);
+    });
 
   const videos =
     (videoData || []) as NutritionVideo[];
@@ -362,42 +377,16 @@ export default async function NutritionPage() {
     ),
   ];
 
-  const sortedNutrition = [...allNutritionItems].sort(
-    (a, b) =>
-      publishedTime(b.item.published_at) -
-      publishedTime(a.item.published_at)
-  );
-
-  // 1 featured item
-  const featuredItem = sortedNutrition.find(
-    (entry) => entry.item.featured === true
-  );
-
-  // 1 newest item that is different from the featured item
-  const recentItem = sortedNutrition.find(
-    (entry) =>
-      entry.item.id !== featuredItem?.item.id
-  );
-
-  // Everything else is eligible to rotate
-  const rotatingPool = sortedNutrition.filter(
-    (entry) =>
-      entry.item.id !== recentItem?.item.id &&
-      entry.item.id !== featuredItem?.item.id
-  );
-
-  // Shuffle the remaining content
-  const shuffledRotating = [...rotatingPool].sort(
-    () => Math.random() - 0.5
-  );
-
-  // Final Nutrition selection:
-  // 1 recent + 1 featured + 4 rotating
-  const latestNutrition: NutritionMixedItem[] = [
-    ...(recentItem ? [recentItem] : []),
-    ...(featuredItem ? [featuredItem] : []),
-    ...shuffledRotating.slice(0, 4),
-  ];
+  /*
+   * Every fresh visit gets a new six-card Nutrition selection
+   * from the COMPLETE published Nutrition article/video library.
+   *
+   * We intentionally do not pin the same "featured" article or
+   * newest article in the first positions, because that was the
+   * reason visitors kept seeing the same content.
+   */
+  const latestNutrition: NutritionMixedItem[] =
+    shuffleItems(allNutritionItems).slice(0, 6);
 
   const preferredTopics = [
     "Blood Sugar",
