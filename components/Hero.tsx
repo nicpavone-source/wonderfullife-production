@@ -211,6 +211,12 @@ export default function Hero() {
             aria-label="Explore WonderfulLife"
           >
             <Link
+              href="/meet-zoey"
+              className="wl-mobile-image-link wl-mobile-image-link-zoey"
+              aria-label="Meet Zoey"
+            />
+
+            <Link
               href="/wellness"
               className="wl-mobile-image-link wl-mobile-image-link-wellness"
               aria-label="Wellness"
@@ -232,12 +238,6 @@ export default function Hero() {
               href="/shop"
               className="wl-mobile-image-link wl-mobile-image-link-shop"
               aria-label="Shop"
-            />
-
-            <Link
-              href="/meet-zoey"
-              className="wl-mobile-image-link wl-mobile-image-link-zoey"
-              aria-label="Meet Zoey"
             />
           </nav>
         </div>

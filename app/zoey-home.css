@@ -999,7 +999,7 @@
 }
 /* =========================================================
    LOCKED MOBILE HERO NAVIGATION
-   Wellness / Recipes / Nutrition / Shop / Meet Zoey
+   Meet Zoey / Wellness / Recipes / Nutrition / Shop
    ========================================================= */
 
 .wl-mobile-hero-actions {
@@ -1130,27 +1130,27 @@
     border-radius: 999px;
   }
 
-  .wl-mobile-image-link-wellness {
+  .wl-mobile-image-link-zoey {
     top: 44.1%;
     height: 5.1%;
   }
 
-  .wl-mobile-image-link-recipes {
+  .wl-mobile-image-link-wellness {
     top: 50.5%;
     height: 5.1%;
   }
 
-  .wl-mobile-image-link-nutrition {
+  .wl-mobile-image-link-recipes {
     top: 56.8%;
     height: 5.1%;
   }
 
-  .wl-mobile-image-link-shop {
+  .wl-mobile-image-link-nutrition {
     top: 63.2%;
     height: 5.1%;
   }
 
-  .wl-mobile-image-link-zoey {
+  .wl-mobile-image-link-shop {
     top: 69.7%;
     height: 5.1%;
   }
