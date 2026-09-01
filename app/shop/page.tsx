@@ -5,6 +5,10 @@ import { unstable_noStore as noStore } from "next/cache";
 import { createClient } from "../../lib/supabase/server";
 import UniversalContentCard from "../../components/content/UniversalContentCard";
 
+// Always render the Shop at request time so the product shuffle is not frozen by Vercel/Next.js caching.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Product = {
   id: number;
   title: string;
@@ -38,6 +42,17 @@ function normalizeCategory(value?: string | null) {
   return String(value || "")
     .trim()
     .toLowerCase();
+}
+
+function shuffleProducts<T>(items: T[]): T[] {
+  const shuffled = [...items];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
 }
 
 export default async function ShopPage({
@@ -74,7 +89,7 @@ export default async function ShopPage({
 
   const products = (data || []) as Product[];
 
-  const filteredProducts =
+  const filteredProducts = shuffleProducts(
     selectedCategory
       ? products.filter(
           (product) =>
@@ -85,7 +100,8 @@ export default async function ShopPage({
               selectedCategory
             )
         )
-      : products;
+      : products
+  );
 
   return (
     <main className="shop-page">
