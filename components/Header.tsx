@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -352,21 +353,21 @@ export default function Header() {
           box-sizing: border-box;
           background: #ffffff;
         }
-
         .site-header .brand {
           flex: 0 0 auto;
-          font-size: clamp(34px, 2.7vw, 48px);
-          line-height: .86;
-          white-space: nowrap;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           text-decoration: none;
         }
 
-        .site-header .brand small {
+        .site-header .header-brand-logo {
           display: block;
-          margin-top: 9px;
-          font-size: 11px;
-          letter-spacing: .24em;
-          white-space: nowrap;
+          width: 330px;
+          height: auto;
+          max-height: 92px;
+          object-fit: contain;
+          filter: contrast(1.12) saturate(1.08);
         }
 
         .site-header .links {
@@ -522,9 +523,6 @@ export default function Header() {
             padding-right: 16px;
           }
 
-          .site-header .brand {
-            font-size: 38px;
-          }
 
           .site-header .links > a {
             font-size: 14px;
@@ -532,13 +530,13 @@ export default function Header() {
         }
 
         @media (max-width: 1200px) {
-          .site-header .brand {
-            font-size: 32px;
+          .site-header .header-brand-logo {
+            width: 285px;
+            max-height: 82px;
           }
+        }
 
-          .site-header .brand small {
-            font-size: 9px;
-          }
+        @media (max-width: 1200px) {
 
           .site-header .links > a {
             font-size: 13px;
@@ -667,21 +665,19 @@ export default function Header() {
           .mobile-menu-link.join-team {
             color: #0072ce;
           }
-
           .site-header .brand {
             min-width: 0;
             justify-self: center;
-            font-size: clamp(26px, 7.7vw, 34px);
-            line-height: .9;
-            text-align: center;
+            width: min(255px, 64vw);
+            max-width: 255px;
           }
 
-          .site-header .brand small {
-            margin-top: 6px;
-            font-size: 8px;
-            letter-spacing: .22em;
-            color: #536d5c;
-            font-weight: 700;
+          .site-header .header-brand-logo {
+            width: 100%;
+            height: auto;
+            max-height: 76px;
+            object-fit: contain;
+            filter: contrast(1.14) saturate(1.08);
           }
 
           .site-header .iconbar {
@@ -779,11 +775,14 @@ export default function Header() {
           className="brand"
           aria-label="WonderfulLife home"
         >
-          Wonder
-          <span className="leaf">ful</span>
-          Life
-
-          <small>Live your best life</small>
+          <Image
+            src="/images/wonderfullife-logo.png"
+            alt="WonderfulLife — Live Your Best Life"
+            width={2000}
+            height={700}
+            priority
+            className="header-brand-logo"
+          />
         </Link>
 
         {/* DESKTOP NAV */}
