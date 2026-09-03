@@ -1,0 +1,195 @@
+.energySuccessPage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 48px 20px;
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(222, 236, 224, 0.9),
+      transparent 42%
+    ),
+    #f7f8f3;
+
+  color: #173d29;
+}
+
+.energySuccessCard {
+  width: min(680px, 100%);
+  padding: clamp(34px, 6vw, 64px);
+  box-sizing: border-box;
+
+  border: 1px solid rgba(23, 61, 41, 0.12);
+  border-radius: 30px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 24px 70px rgba(23, 61, 41, 0.12);
+
+  text-align: center;
+}
+
+.energyCheck {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+
+  margin: 0 auto 24px;
+
+  border-radius: 50%;
+
+  background: #e8f2e8;
+  color: #1f7a4d;
+
+  font-size: 34px;
+  font-weight: 800;
+}
+
+.energyEyebrow {
+  margin: 0 0 14px;
+
+  color: #a77a24;
+
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.energySuccessCard h1 {
+  margin: 0;
+
+  color: #173d29;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(2.3rem, 6vw, 4.2rem);
+
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+
+  text-wrap: balance;
+}
+
+.energyMessage {
+  max-width: 560px;
+
+  margin: 24px auto 0;
+
+  color: #53645b;
+
+  font-size:
+    clamp(1rem, 2vw, 1.15rem);
+
+  line-height: 1.65;
+}
+
+.energyPrimaryButton,
+.energySecondaryButton {
+  display: inline-flex;
+
+  min-height: 54px;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 30px;
+  padding: 0 28px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+  font-weight: 800;
+
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease;
+}
+
+.energyPrimaryButton {
+  background: #1f7a4d;
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(31, 122, 77, 0.22);
+}
+
+.energyPrimaryButton:hover {
+  transform: translateY(-2px);
+
+  background: #17663f;
+
+  box-shadow:
+    0 16px 34px rgba(31, 122, 77, 0.26);
+}
+
+.energySecondaryButton {
+  border:
+    1px solid rgba(23, 61, 41, 0.2);
+
+  background: #ffffff;
+  color: #173d29;
+}
+
+.energySecurityNote {
+  margin: 18px 0 0;
+
+  color: #7a877f;
+
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.energyHomeLink {
+  display: inline-block;
+
+  margin-top: 22px;
+
+  color: #53645b;
+
+  font-size: 0.92rem;
+
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .energySuccessPage {
+    padding: 24px 14px;
+  }
+
+  .energySuccessCard {
+    padding: 34px 22px;
+    border-radius: 22px;
+  }
+
+  .energyCheck {
+    width: 62px;
+    height: 62px;
+
+    font-size: 29px;
+  }
+
+  .energyPrimaryButton,
+  .energySecondaryButton {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .energyPrimaryButton,
+  .energySecondaryButton {
+    transition: none;
+  }
+}
