@@ -73,9 +73,12 @@ export default function EnergyResetPage() {
               <span>CAD</span>
             </div>
 
-            <button type="button" className="primaryButton">
-              GET THE ENERGY RESET
-            </button>
+            <a
+  href="https://buy.stripe.com/test_4gMeVd3KG0fz5xc295fUQ01"
+  className="primaryButton"
+>
+  GET THE ENERGY RESET
+</a>
 
             <div className="purchaseNotes">
               <span>Instant PDF access</span>
