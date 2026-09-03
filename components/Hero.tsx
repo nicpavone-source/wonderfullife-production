@@ -144,9 +144,20 @@ export default function Hero() {
             className="wl-hero-image wl-hero-image-desktop"
           />
 
-          <div className="wl-harbour-light" aria-hidden="true" />
-          <div className="wl-harbour-water" aria-hidden="true" />
-          <div className="wl-harbour-glow" aria-hidden="true" />
+          <div
+            className="wl-harbour-light"
+            aria-hidden="true"
+          />
+
+          <div
+            className="wl-harbour-water"
+            aria-hidden="true"
+          />
+
+          <div
+            className="wl-harbour-glow"
+            aria-hidden="true"
+          />
         </div>
 
         <div className="wl-hero-gradient" />
@@ -166,9 +177,9 @@ export default function Hero() {
           </h1>
 
           <p className="wl-hero-description">
-            Explore practical wellness guidance, nourishing recipes,
-            inspiring stories and supportive tools created to help you
-            become your best self.
+            Explore practical wellness guidance, nourishing
+            recipes, inspiring stories and supportive tools
+            created to help you become your best self.
           </p>
 
           <div className="wl-hero-actions">
@@ -206,34 +217,50 @@ export default function Hero() {
             className="wl-mobile-homepage-image"
           />
 
+          {/* =================================================
+              MOBILE IMAGE BUTTON CLICK AREAS
+
+              Visible order:
+              1. Meet Zoey
+              2. Wellness
+              3. Recipes
+              4. Nutrition
+              5. Shop
+              ================================================= */}
+
           <nav
             className="wl-mobile-image-links"
             aria-label="Explore WonderfulLife"
           >
+            {/* MEET ZOEY */}
             <Link
               href="/meet-zoey"
               className="wl-mobile-image-link wl-mobile-image-link-zoey"
               aria-label="Meet Zoey"
             />
 
+            {/* WELLNESS */}
             <Link
               href="/wellness"
               className="wl-mobile-image-link wl-mobile-image-link-wellness"
               aria-label="Wellness"
             />
 
+            {/* RECIPES */}
             <Link
               href="/recipes"
               className="wl-mobile-image-link wl-mobile-image-link-recipes"
               aria-label="Recipes"
             />
 
+            {/* NUTRITION */}
             <Link
               href="/nutrition"
               className="wl-mobile-image-link wl-mobile-image-link-nutrition"
               aria-label="Nutrition"
             />
 
+            {/* SHOP */}
             <Link
               href="/shop"
               className="wl-mobile-image-link wl-mobile-image-link-shop"
@@ -242,6 +269,10 @@ export default function Hero() {
           </nav>
         </div>
       </section>
+
+      {/* =====================================================
+          HARBOUR AMBIENCE
+          ===================================================== */}
 
       <audio
         ref={audioRef}
