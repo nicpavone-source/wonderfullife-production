@@ -421,6 +421,50 @@ export default function MoreEnergyPage() {
         }
 
         /* =========================================================
+           PREMIUM ENERGY RESET PRODUCT — FINAL OVERRIDE
+           ========================================================= */
+        .product { grid-template-columns:minmax(0,1.35fr) minmax(360px,.85fr); gap:46px; align-items:stretch; padding:34px; background:linear-gradient(135deg,#f5f7f1 0%,#fbfcf8 100%); }
+        .guide-preview { grid-template-columns:1.08fr .92fr; gap:14px; min-width:0; }
+        .guide-page { min-height:470px; padding:0; overflow:hidden; border:1px solid rgba(23,61,41,.08); border-radius:14px; box-shadow:0 16px 38px rgba(20,61,41,.10); }
+        .guide-cover { position:relative; display:block; background:linear-gradient(145deg,#fff 0%,#f4f1e8 100%); color:#173d29; }
+        .guide-cover-image { position:absolute; right:-9%; bottom:0; width:76%; height:91%; object-fit:contain; object-position:bottom right; z-index:1; }
+        .guide-cover-shade { position:absolute; inset:0; z-index:2; background:linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.90) 39%,rgba(255,255,255,.10) 70%); }
+        .guide-cover-content { position:relative; z-index:3; display:flex; flex-direction:column; height:100%; padding:28px 24px 24px; }
+        .guide-brand { color:#173d29; font-size:10px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+        .guide-cover-title { max-width:185px; margin:76px 0 0; color:#173d29; font-size:34px; font-weight:800; letter-spacing:-.045em; line-height:.96; }
+        .guide-cover-title .gold { color:#b6933d; }
+        .guide-cover-subtitle { max-width:170px; margin:18px 0 0; color:#53675b; font-size:12px; line-height:1.5; }
+        .guide-cover-footer { margin-top:auto; color:#287148; font-size:9px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; }
+        .sample-page { padding:28px 22px; }
+        .sample-page h4 { margin:18px 0 14px; font-size:22px; }
+        .sample-page p,.sample-page li { font-size:12px; line-height:1.6; }
+        .sample-callout { margin-top:18px; padding:14px; background:#f1f5ed; border-radius:10px; }
+        .product-copy { display:flex; flex-direction:column; justify-content:center; min-width:0; padding:8px 8px 8px 0; }
+        .product-copy h2 { margin:0 0 14px; font-size:clamp(34px,3.2vw,48px); line-height:1.02; }
+        .product-copy > p { margin:0; font-size:16px; line-height:1.58; }
+        .includes { display:grid; gap:8px; margin:22px 0 20px; }
+        .includes li { margin:0; font-size:14px; }
+        .purchase-block { padding-top:18px; border-top:1px solid #d9e2d5; }
+        .price { margin:0 0 14px; font-size:34px; letter-spacing:-.025em; }
+        .coming-button { display:flex; align-items:center; justify-content:center; width:100%; max-width:390px; margin:0; padding:16px 24px; font-size:13px; text-decoration:none; }
+        .purchase-note { margin-top:12px !important; color:#617168 !important; font-size:12px !important; line-height:1.45 !important; }
+
+        /* =========================================================
+           REAL PRODUCT ASSETS — COVER + DAY 3
+           ========================================================= */
+        .guide-preview { grid-template-columns: .86fr 1.14fr; gap:16px; align-items:stretch; }
+        .guide-page { min-height:0; aspect-ratio:auto; padding:0; background:#fff; }
+        .guide-asset { display:block; width:100%; height:100%; object-fit:cover; }
+        .guide-cover-asset { object-position:center; }
+        .guide-day3-asset { object-fit:contain; background:#fff; }
+
+        @media (max-width:760px) {
+          .guide-preview { grid-template-columns:1fr 1fr; max-width:560px; gap:8px; }
+          .guide-page { min-height:0; }
+          .guide-asset { height:auto; }
+        }
+
+        /* =========================================================
            MEDICAL NOTE
            ========================================================= */
 
@@ -652,6 +696,24 @@ export default function MoreEnergyPage() {
           }
         }
 
+        @media (max-width:760px) {
+          .product { display:block; padding:18px 14px 22px; }
+          .guide-preview { grid-template-columns:1.08fr .92fr; max-width:520px; margin:0 auto 28px; gap:8px; }
+          .guide-page { min-height:315px; }
+          .guide-cover-content { padding:18px 14px 16px; }
+          .guide-cover-image { right:-15%; width:86%; height:88%; }
+          .guide-cover-title { max-width:112px; margin-top:48px; font-size:23px; }
+          .guide-cover-subtitle { max-width:108px; margin-top:12px; font-size:9px; }
+          .guide-brand,.guide-cover-footer { font-size:7px; }
+          .sample-page { padding:18px 13px; }
+          .sample-page h4 { margin-top:12px; font-size:16px; }
+          .sample-page p,.sample-page li { font-size:9px; line-height:1.45; }
+          .product-copy { padding:0 3px; }
+          .product-copy h2 { font-size:30px; }
+          .price { font-size:30px; }
+          .coming-button { max-width:none; }
+        }
+
         /* =========================================================
            SMALL PHONES
            ========================================================= */
@@ -684,279 +746,105 @@ export default function MoreEnergyPage() {
             font-size: 19px;
           }
         }
+
+        /* COMPACT TOP — hero + answer + actions + factors */
+        .top-combo { display:grid; grid-template-columns: 46% 54%; min-height:620px; border:1px solid #dce7d8; border-radius:30px; overflow:hidden; background:#fbfcf8; }
+        .top-combo .energy-hero { min-height:620px; border-radius:0; }
+        .top-combo .energy-hero-content { min-height:620px; padding:54px 44px; }
+        .top-combo .back-link { left:44px; top:28px; }
+        .top-combo .energy-title { font-size:clamp(44px,4.2vw,64px); max-width:520px; }
+        .top-combo .energy-lead { max-width:470px; font-size:16px; line-height:1.5; }
+        .quick-panel { padding:34px 34px 28px; display:flex; flex-direction:column; justify-content:center; }
+        .quick-panel h2 { margin:0 0 10px; font-size:34px; line-height:1.06; letter-spacing:-.035em; }
+        .quick-answer { margin:0 0 20px; color:#59685f; font-size:15px; line-height:1.55; }
+        .quick-rule { border:0; border-top:1px solid #d6e1d3; margin:0 0 18px; }
+        .quick-panel .today { margin:0; padding:0; background:transparent; border:0; }
+        .quick-panel .today h2 { font-size:25px; margin-bottom:12px; }
+        .quick-panel .today-grid { margin:0; gap:10px; }
+        .quick-panel .today-card { padding:0 0 12px; overflow:hidden; position:relative; }
+        .today-thumb { width:100%; height:105px; object-fit:cover; display:block; }
+        .quick-panel .today-number { position:absolute; top:86px; left:12px; width:30px; height:30px; margin:0; }
+        .quick-panel .today-card h3 { margin:20px 12px 5px; font-size:15px; }
+        .quick-panel .today-card p { margin:0 12px; font-size:12px; line-height:1.4; }
+        .quick-panel .contributors { margin-top:18px; padding-top:16px; border-top:1px solid #d6e1d3; }
+        .quick-panel .contributors .section-label { margin-bottom:10px; }
+        .quick-panel .contributors h2 { display:none; }
+        .quick-panel .factor-grid { grid-template-columns:repeat(3,1fr); gap:8px; margin-top:0; }
+        .quick-panel .factor { padding:10px 11px; font-size:11px; line-height:1.35; min-height:72px; }
+        .quick-panel .factor strong { font-size:13px; margin-bottom:3px; }
+        .content { margin-top:32px; }
+        @media (max-width: 900px) { .top-combo{display:block;} .top-combo .energy-hero,.top-combo .energy-hero-content{min-height:470px;} .quick-panel{padding:28px 20px;} .quick-panel .factor-grid{grid-template-columns:repeat(2,1fr);} }
+        @media (max-width: 620px) { .quick-panel .today-grid{grid-template-columns:1fr;} .quick-panel .today-card{display:grid;grid-template-columns:115px 1fr;min-height:105px;padding:0;} .today-thumb{height:100%;min-height:105px;} .quick-panel .today-number{top:10px;left:98px;} .quick-panel .today-card h3{margin:18px 12px 4px 20px;} .quick-panel .today-card p{margin:0 12px 12px 20px;} }
       `}</style>
 
       <div className="energy-shell">
 
-        {/* HERO */}
-        <section className="energy-hero">
-          <img
-            src="/images/editorial/jogging.png"
-            alt="Active man jogging outdoors"
-          />
+        {/* COMPACT HERO + ANSWER + ACTIONS */}
+        <section className="top-combo">
+          <section className="energy-hero">
+            <img src="/images/editorial/jogging.png" alt="Jogger beside the Vancouver waterfront" />
+            <div className="energy-overlay" />
+            <div className="energy-hero-content">
+              <Link href="/ask-zoey" className="back-link">← Ask Zoey</Link>
+              <p className="energy-eyebrow">More Energy</p>
+              <h1 className="energy-title">Why am I tired all the time?</h1>
+              <p className="energy-lead">Feeling drained every day doesn&apos;t always mean you need more caffeine. Start by looking at what&apos;s really going on — and the simple habits that can help.</p>
+            </div>
+          </section>
 
-          <div className="energy-overlay" />
+          <div className="quick-panel">
+            <p className="section-label">Zoey&apos;s Answer</p>
+            <h2>Start with the fundamentals.</h2>
+            <p className="quick-answer">Energy is influenced by sleep, nutrition, hydration, movement, stress and overall health. Look for patterns, start with the basics, and give small changes time to work.</p>
+            <hr className="quick-rule" />
 
-          <div className="energy-hero-content">
-            <Link
-              href="/ask-zoey"
-              className="back-link"
-            >
-              ← Ask Zoey
-            </Link>
+            <section className="today">
+              <p className="section-label">Try This Today</p>
+              <h2>Three simple places to start.</h2>
+              <div className="today-grid">
+                <div className="today-card"><img className="today-thumb" src="/images/editorial/hydration (2).png" alt="Hydration"/><span className="today-number">1</span><h3>Start with water</h3><p>Have a glass when you wake up and keep water nearby.</p></div>
+                <div className="today-card"><img className="today-thumb" src="/images/editorial/avocado toast with egg.png" alt="Protein-rich breakfast"/><span className="today-number">2</span><h3>Add protein</h3><p>Include a protein source in your first substantial meal.</p></div>
+                <div className="today-card"><img className="today-thumb" src="/images/editorial/walking.png" alt="Walking outdoors"/><span className="today-number">3</span><h3>Move for 10 minutes</h3><p>Take a brisk walk outdoors to break up a sluggish day.</p></div>
+              </div>
+            </section>
 
-            <p className="energy-eyebrow">
-              More Energy
-            </p>
-
-            <h1 className="energy-title">
-              Why am I tired all the time?
-            </h1>
-
-            <p className="energy-lead">
-              Feeling drained every day doesn't always mean you need
-              another cup of coffee. Start by looking at the everyday
-              habits that help your body produce and maintain steady
-              energy.
-            </p>
+            <section className="contributors">
+              <p className="section-label">What may be affecting your energy?</p>
+              <h2>What may be affecting your energy?</h2>
+              <div className="factor-grid">
+                <div className="factor"><strong>Sleep</strong>Poor-quality sleep can leave you tired even after enough hours.</div>
+                <div className="factor"><strong>Food</strong>Skipped or unsatisfying meals can contribute to energy swings.</div>
+                <div className="factor"><strong>Hydration</strong>Not drinking enough fluids can leave you feeling sluggish.</div>
+                <div className="factor"><strong>Movement</strong>Long periods of inactivity can make a tired day feel worse.</div>
+                <div className="factor"><strong>Stress</strong>Constant mental load can be exhausting without physical work.</div>
+                <div className="factor"><strong>Health</strong>Persistent fatigue can sometimes have an underlying medical cause.</div>
+              </div>
+            </section>
           </div>
         </section>
 
         <section className="content">
-
-          {/* ZOEY ANSWER */}
-          <p className="section-label">
-            Zoey&apos;s Answer
-          </p>
-
-          <h2>
-            Start with the fundamentals.
-          </h2>
-
-          <div className="answer">
-            <p>
-              Energy is influenced by much more than how many hours
-              you spend in bed. Sleep quality, hydration, the foods
-              you eat, meal timing, physical activity and stress can
-              all affect how energetic you feel throughout the day.
-            </p>
-
-            <p>
-              Instead of trying to fix everything at once, look for
-              patterns. Do you skip breakfast and feel exhausted by
-              mid-morning? Do you rely on caffeine to compensate for
-              poor sleep? Are long periods of sitting leaving you
-              sluggish? Small clues can point toward practical
-              changes.
-            </p>
-
-            <p>
-              Start with the basics and give them time to work.
-              Consistent sleep, nutritious meals containing protein,
-              adequate fluids and regular movement provide a strong
-              foundation for everyday energy.
-            </p>
-          </div>
-
-          {/* TRY THIS TODAY */}
-          <section className="today">
-            <p className="section-label">
-              Try This Today
-            </p>
-
-            <h2>
-              Three simple places to start.
-            </h2>
-
-            <div className="today-grid">
-
-              <div className="today-card">
-                <span className="today-number">
-                  1
-                </span>
-
-                <h3>
-                  Start with water
-                </h3>
-
-                <p>
-                  Have a glass of water when you wake up and keep
-                  fluids within reach during the day.
-                </p>
-              </div>
-
-              <div className="today-card">
-                <span className="today-number">
-                  2
-                </span>
-
-                <h3>
-                  Add protein
-                </h3>
-
-                <p>
-                  Include a useful protein source in your first
-                  substantial meal instead of relying mainly on
-                  refined carbohydrates.
-                </p>
-              </div>
-
-              <div className="today-card">
-                <span className="today-number">
-                  3
-                </span>
-
-                <h3>
-                  Move for 10 minutes
-                </h3>
-
-                <p>
-                  Take a brisk walk outdoors. Movement and daylight
-                  are simple ways to break up a sluggish day.
-                </p>
-              </div>
-
-            </div>
-          </section>
-
-          {/* ENERGY FACTORS */}
-          <section className="contributors">
-            <p className="section-label">
-              Look At The Whole Day
-            </p>
-
-            <h2>
-              What may be affecting your energy?
-            </h2>
-
-            <div className="factor-grid">
-
-              <div className="factor">
-                <strong>
-                  Sleep
-                </strong>
-
-                Irregular schedules and poor-quality sleep can leave
-                you tired even after spending enough time in bed.
-              </div>
-
-              <div className="factor">
-                <strong>
-                  Food
-                </strong>
-
-                Skipped meals and meals that aren&apos;t satisfying can
-                contribute to energy swings.
-              </div>
-
-              <div className="factor">
-                <strong>
-                  Hydration
-                </strong>
-
-                Your fluid needs vary, but regularly forgetting to
-                drink can leave you feeling below your best.
-              </div>
-
-              <div className="factor">
-                <strong>
-                  Movement
-                </strong>
-
-                Long periods of inactivity can make an already tired
-                day feel even more sluggish.
-              </div>
-
-              <div className="factor">
-                <strong>
-                  Stress
-                </strong>
-
-                Constant mental load can be exhausting even when
-                you&apos;re not doing strenuous physical work.
-              </div>
-
-              <div className="factor">
-                <strong>
-                  Health
-                </strong>
-
-                Persistent fatigue can sometimes have an underlying
-                medical cause and shouldn&apos;t simply be ignored.
-              </div>
-
-            </div>
-          </section>
-
           {/* DIGITAL PRODUCT */}
           <section className="product">
 
             <div className="guide-preview">
 
-              {/* COVER */}
-              <div className="guide-page guide-cover">
-                <span className="guide-brand">
-                  Wonderful-Life
-                </span>
-
-                <div>
-                  <p className="guide-brand">
-                    14-Day Guide
-                  </p>
-
-                  <h3>
-                    Energy
-                    <br />
-                    Reset
-                  </h3>
-
-                  <p>
-                    Simple everyday habits for more consistent
-                    energy.
-                  </p>
-                </div>
-
-                <span className="guide-brand">
-                  Ask Zoey
-                </span>
+              {/* FINISHED ENERGY RESET COVER */}
+              <div className="guide-page">
+                <img
+                  className="guide-asset guide-cover-asset"
+                  src="/images/energy-reset-cover.png"
+                  alt="Wonderful-Life 14-Day Energy Reset guide cover featuring Zoey"
+                />
               </div>
 
-              {/* SAMPLE PAGE */}
-              <div className="guide-page sample-page">
-                <span className="sample-label">
-                  Sample Page
-                </span>
-
-                <h4>
-                  Day 3
-                  <br />
-                  Build a Better Breakfast
-                </h4>
-
-                <p>
-                  Build your first substantial meal around protein,
-                  fibre and foods you genuinely enjoy.
-                </p>
-
-                <strong>
-                  Try today:
-                </strong>
-
-                <ul>
-                  <li>Add a protein source.</li>
-                  <li>Include fruit or vegetables.</li>
-                  <li>Drink water with your meal.</li>
-                </ul>
-
-                <p>
-                  <strong>
-                    Today&apos;s goal:
-                  </strong>
-
-                  <br />
-
-                  Notice how your energy feels before lunch.
-                </p>
+              {/* ACTUAL DAY 3 PAGE FROM THE GUIDE */}
+              <div className="guide-page">
+                <img
+                  className="guide-asset guide-day3-asset"
+                  src="/images/energy-reset-day-3.png"
+                  alt="Day 3 Build a Better Breakfast sample page from the 14-Day Energy Reset"
+                />
               </div>
 
             </div>
@@ -987,16 +875,13 @@ export default function MoreEnergyPage() {
                 <li>Printable worksheets</li>
               </ul>
 
-             <div className="price">
-  $19 CAD
-</div>
-
-<Link
-  href="/energy-reset"
-  className="coming-button"
->
-  GET THE ENERGY RESET
-</Link> 
+              <div className="purchase-block">
+                <div className="price">$19 CAD</div>
+                <Link href="/energy-reset" className="coming-button">
+                  GET THE ENERGY RESET →
+                </Link>
+                <p className="purchase-note">Instant digital download • PDF guide • Works on all devices</p>
+              </div> 
             </div>
 
           </section>
