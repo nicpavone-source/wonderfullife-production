@@ -15,7 +15,8 @@
     "lucide-react": "latest",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "stripe": "^22.6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.2",
