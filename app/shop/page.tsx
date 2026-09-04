@@ -326,31 +326,40 @@ export default async function ShopPage({
           }
         }
 
-        @media (max-width: 700px) {
-          .shop-hero {
-            height: clamp(300px, 62vw, 420px);
-          }
+         @media (max-width: 700px) {
+  .shop-hero {
+    height: auto;
+    overflow: visible;
+  }
 
-          .shop-products {
-            width: min(100% - 24px, 1320px);
-            margin: 0 auto;
-            padding: 20px 0 56px;
-          }
+  .shop-hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+  }
 
-          .shop-header {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 14px;
-          }
+  .shop-products {
+    width: min(100% - 24px, 1320px);
+    margin: 0 auto;
+    padding: 20px 0 56px;
+  }
 
-          .product-grid {
-            grid-template-columns: 1fr;
-          }
+  .shop-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
 
-          .shop-filter {
-            gap: 7px;
-          }
-        }
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-filter {
+    gap: 7px;
+  }
+}
 
         @media (max-width: 460px) {
           .shop-filter-link {
