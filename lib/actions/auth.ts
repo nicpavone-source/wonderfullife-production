@@ -26,7 +26,7 @@ export async function signInAction(formData: FormData) {
     );
   }
 
-  const { error } =
+  const { data, error } =
     await supabase.auth.signInWithPassword({
       email,
       password,
@@ -40,7 +40,15 @@ export async function signInAction(formData: FormData) {
     );
   }
 
-  redirect("/dashboard");
+  if (!data.session || !data.user) {
+    redirect(
+      `/sign-in?message=${encodeURIComponent(
+        "Sign in succeeded but no session was created."
+      )}`
+    );
+  }
+
+  redirect("/");
 }
 
 /* =========================================================

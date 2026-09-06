@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { signInAction } from "@/lib/actions/auth";
-
+import PasswordInput from "./PasswordInput";
 type SignInSearchParams = {
   message?: string;
 };
@@ -369,6 +369,69 @@ export default async function SignIn({
             0 0 0 4px
             rgba(47,113,67,0.08);
         }
+
+        .signin-input:focus {
+  border-color: #649b73;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 4px
+    rgba(47,113,67,0.08);
+}
+
+/* PASTE NEW CODE HERE */
+
+.password-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  padding-right: 58px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #567063;
+
+  cursor: pointer;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+}
+
+.password-toggle:hover {
+  background: rgba(18, 98, 65, 0.08);
+  color: #126241;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #649b73;
+  outline-offset: 2px;
+}
+
+.password-toggle svg {
+  width: 21px;
+  height: 21px;
+  display: block;
+}
 
         .forgot-placeholder {
           color: #226444;
@@ -816,15 +879,7 @@ export default async function SignIn({
                 </span>
               </div>
 
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className="signin-input"
-                placeholder="Enter your password"
-                autoComplete="current-password"
-                required
-              />
+             <PasswordInput />
             </div>
 
             <button

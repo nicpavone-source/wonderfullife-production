@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-import { signOutAction } from "@/lib/actions/auth";
 import { createClient } from "@/lib/supabase/client";
 
 type IconProps = {
@@ -325,13 +324,27 @@ export default function Header() {
       active = false;
       subscription.subscription.unsubscribe();
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (mobileMenuRef.current) {
       mobileMenuRef.current.open = false;
     }
   }, [pathname]);
+
+  async function handleSignOut() {
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Sign out failed:", error.message);
+      return;
+    }
+
+    setMember(null);
+    window.location.href = "/";
+  }
 
   return (
     <header className="site-header">
@@ -353,6 +366,7 @@ export default function Header() {
           box-sizing: border-box;
           background: #ffffff;
         }
+
         .site-header .brand {
           flex: 0 0 auto;
           display: flex;
@@ -523,7 +537,6 @@ export default function Header() {
             padding-right: 16px;
           }
 
-
           .site-header .links > a {
             font-size: 14px;
           }
@@ -537,7 +550,6 @@ export default function Header() {
         }
 
         @media (max-width: 1200px) {
-
           .site-header .links > a {
             font-size: 13px;
           }
@@ -665,6 +677,7 @@ export default function Header() {
           .mobile-menu-link.join-team {
             color: #0072ce;
           }
+
           .site-header .brand {
             min-width: 0;
             justify-self: center;
@@ -880,14 +893,13 @@ export default function Header() {
                       Saved Content
                     </Link>
 
-                    <form action={signOutAction}>
-                      <button
-                        type="submit"
-                        className="header-signout-button"
-                      >
-                        Sign Out
-                      </button>
-                    </form>
+                    <button
+                      type="button"
+                      className="header-signout-button"
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </button>
                   </div>
                 </div>
               </details>
