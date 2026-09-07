@@ -107,6 +107,55 @@ export async function signUpAction(formData: FormData) {
 }
 
 /* =========================================================
+   REQUEST PASSWORD RESET
+   ========================================================= */
+
+export async function requestPasswordResetAction(
+  formData: FormData
+) {
+  const supabase = await createClient();
+
+  const email = String(
+    formData.get("email") || ""
+  ).trim();
+
+  if (!email) {
+    redirect(
+      `/forgot-password?message=${encodeURIComponent(
+        "Please enter your email address."
+      )}`
+    );
+  }
+
+  const redirectUrl =
+    process.env.NEXT_PUBLIC_SITE_URL
+      ? `${process.env.NEXT_PUBLIC_SITE_URL}/reset-password`
+      : "http://localhost:3000/reset-password";
+
+  const { error } =
+    await supabase.auth.resetPasswordForEmail(
+      email,
+      {
+        redirectTo: redirectUrl,
+      }
+    );
+
+  if (error) {
+    redirect(
+      `/forgot-password?message=${encodeURIComponent(
+        error.message
+      )}`
+    );
+  }
+
+  redirect(
+    `/forgot-password?message=${encodeURIComponent(
+      "If an account exists for that email, a password reset link has been sent."
+    )}`
+  );
+}
+
+/* =========================================================
    SIGN OUT
    ========================================================= */
 

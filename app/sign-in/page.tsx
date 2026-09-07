@@ -440,6 +440,8 @@ export default async function SignIn({
           font-weight: 700;
 
           opacity: 0.72;
+          text-decoration: none;
+          cursor: pointer;
         }
 
         /* -----------------------------------------------------
@@ -874,9 +876,12 @@ export default async function SignIn({
                   Password
                 </label>
 
-                <span className="forgot-placeholder">
-                  Forgot password?
-                </span>
+                <Link
+  href="/forgot-password"
+  className="forgot-placeholder"
+>
+  Forgot password?
+</Link>
               </div>
 
              <PasswordInput />
