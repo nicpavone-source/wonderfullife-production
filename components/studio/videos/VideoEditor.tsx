@@ -43,16 +43,15 @@ const VIDEO_TYPES = ["video/mp4", "video/quicktime", "video/webm"];
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 const categories = [
+  "Home",
   "Wellness",
   "Nutrition",
   "Recipes",
-  "Fitness",
-  "Healthy Aging",
-  "Beauty",
-  "Community",
-  "USANA",
+  "Videos",
+  "Shop",
+  "Join Our Team",
+  "Ask Zoey",
   "Meet Zoey",
-  "Behind the Scenes",
 ];
 
 function makeSlug(value: string) {
@@ -107,7 +106,7 @@ export default function VideoEditor({
   const [description, setDescription] = useState(initialVideo?.excerpt ?? "");
   const [transcript, setTranscript] = useState(initialVideo?.body ?? "");
   const [category, setCategory] = useState(
-    initialVideo?.category ?? "Wellness"
+    initialVideo?.category ?? "Videos"
   );
   const [tags, setTags] = useState(initialVideo?.tags?.join(", ") ?? "");
   const [featured, setFeatured] = useState(Boolean(initialVideo?.featured));
@@ -434,7 +433,7 @@ export default function VideoEditor({
                   />
                 </Field>
 
-                <Field label="Category">
+                <Field label="Display this video in">
                   <select
                     value={category}
                     onChange={(event) => setCategory(event.target.value)}
