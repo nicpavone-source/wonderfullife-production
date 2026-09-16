@@ -77,10 +77,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           path = `/videos/${item.slug}`;
           break;
 
-        case "product":
-          path = `/products/${item.slug}`;
-          break;
-
         default:
           return [];
       }
