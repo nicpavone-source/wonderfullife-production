@@ -74,7 +74,7 @@ export default function EnergyResetPage() {
             </div>
 
             <a
-  href="https://buy.stripe.com/test_4gMeVd3KG0fz5xc295fUQ01"
+  href="https://buy.stripe.com/7sY9AM0cZ6FZ4jVbHK1gs03"
   className="primaryButton"
 >
   GET THE ENERGY RESET
