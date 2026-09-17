@@ -1,5 +1,5 @@
 const STRIPE_PRICE_ID =
-  "price_1UBTCJFUKrFnqHsXRSgtyUdV";
+   "price_1UD7Bv2VaXyQTsaLXNASNo3v";
 
 const EXPECTED_AMOUNT = 1900;
 
@@ -31,11 +31,11 @@ type StripeCheckoutSession = {
 
 function getStripeSecretKey() {
   const key =
-    process.env.STRIPE_SANDBOX_SECRET_KEY;
+    process.env.STRIPE_SECRET_KEY;
 
   if (!key) {
     throw new Error(
-      "Missing STRIPE_SANDBOX_SECRET_KEY environment variable."
+      "Missing STRIPE_SECRET_KEY environment variable."
     );
   }
 
