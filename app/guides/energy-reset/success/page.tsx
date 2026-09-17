@@ -1,6 +1,8 @@
 import Link from "next/link";
 import "./success.css";
 
+import PurchaseConversion from "@/components/PurchaseConversion";
+
 import {
   verifyEnergyResetCheckout,
 } from "@/lib/paid-guides/energy-reset";
@@ -30,6 +32,9 @@ export default async function EnergyResetSuccessPage({
     );
   }
 
+  // IMPORTANT:
+  // If Stripe does not verify the purchase,
+  // no Google Ads purchase conversion is rendered.
   if (!paid) {
     return (
       <main className="energySuccessPage">
@@ -66,6 +71,14 @@ export default async function EnergyResetSuccessPage({
 
   return (
     <main className="energySuccessPage">
+
+      {/* Google Ads purchase conversion.
+          This component exists ONLY after Stripe
+          has verified the purchase. */}
+      <PurchaseConversion
+        transactionId={sessionId}
+      />
+
       <section className="energySuccessCard">
         <div
           className="energyCheck"
