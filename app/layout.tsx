@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import SiteChrome from "@/components/SiteChrome";
 import AnalyticsScripts from "@/components/AnalyticsScripts";
 import BackToTop from "@/components/BackToTop";
+import PageViewTracker from "@/components/PageViewTracker";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -24,6 +25,8 @@ export default function RootLayout({
         {children}
 
         <BackToTop />
+
+        <PageViewTracker />
 
         <AnalyticsScripts />
 
