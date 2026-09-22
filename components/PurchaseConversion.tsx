@@ -29,7 +29,7 @@ export default function PurchaseConversion({
 
       gtag("event", "conversion", {
         send_to:
-          "AW-18453200451/RNEbCNK6r_ocEMP81d9E",
+          "AW-18453200451/RNEbCNK6r_ocEMP8ld9E",
         value: 19.0,
         currency: "CAD",
         transaction_id: transactionId,
