@@ -1,100 +1,187 @@
 import Image from "next/image";
 import Link from "next/link";
+import EnergyResetCheckoutLink from "@/components/analytics/EnergyResetCheckoutLink";
 
 const previewCards = [
   {
     image: "/energy-reset/day-3.png",
     eyebrow: "DAY 3",
     title: "Build a Better Breakfast",
-    text: "Simple, nourishing choices designed to support steadier energy.",
+    text: "A great morning starts with the right fuel.",
   },
   {
     image: "/energy-reset/day-7.png",
     eyebrow: "DAY 7",
     title: "Your First Check-In",
-    text: "Pause, notice what is working and make small adjustments.",
-  },
-  {
-    image: "/energy-reset/energy-plate.png",
-    eyebrow: "ENERGY PLATE",
-    title: "Balanced. Nourishing. Simple.",
-    text: "A visual guide to building satisfying, balanced meals.",
+    text: "Celebrate progress. Build momentum for the week ahead.",
   },
   {
     image: "/energy-reset/energy-tracker.png",
-    eyebrow: "TRACKER",
-    title: "See Your Progress",
-    text: "Track the habits that influence how you feel over 14 days.",
+    eyebrow: "TOOLS & TRACKERS",
+    title: "14-Day Energy Tracker",
+    text: "One minute a day can reveal patterns you would otherwise miss.",
   },
+];
+
+const pillars = [
+  { icon: "✦", title: "FOOD" },
+  { icon: "◯", title: "HYDRATION" },
+  { icon: "♙", title: "MOVEMENT" },
+  { icon: "☾", title: "SLEEP" },
 ];
 
 export default function EnergyResetPage() {
   return (
     <main className="energyPage">
-      {/* HERO */}
-      <section className="hero">
-        <div className="heroInner">
-          <div className="coverWrap">
-            <Image
-              src="/energy-reset/cover.png"
-              alt="Wonderful-Life 14-Day Energy Reset"
-              width={850}
-              height={1200}
-              priority
-              className="coverImage"
-            />
-          </div>
+      {/* ======================================================
+          FULL-BLEED PHOTOGRAPHIC HERO
+      ====================================================== */}
 
+      <section className="hero">
+        <div className="heroShade" />
+
+        <div className="heroInner">
           <div className="heroCopy">
             <div className="eyebrow">
-              WONDERFUL-LIFE WELLNESS GUIDES
+              <span className="eyebrowLine" />
+              <span>14-DAY GUIDED WELLNESS PLAN</span>
+              <span className="eyebrowLine" />
             </div>
 
             <h1>
-              14-Day
-              <br />
-              Energy Reset
+              <span className="titleGreen">14-Day</span>
+              <span className="titleGold">Energy Reset</span>
             </h1>
 
-            <h2>
+            <p className="heroPromise">
               14 days. Small changes.
               <br />
               More consistent energy.
-            </h2>
-
-            <p className="heroDescription">
-              A practical wellness guide to help you explore the everyday
-              habits affecting your energy and build simple routines you can
-              actually maintain.
             </p>
 
-            <div className="priceRow">
+            <div className="benefits">
+              <div className="benefit">
+                <div className="benefitIcon">ϟ</div>
+
+                <div className="benefitText">
+                  <strong>Beat the 2 PM afternoon crash</strong>
+                  <span>without extra coffee</span>
+                </div>
+              </div>
+
+              <div className="benefit">
+                <div className="benefitIcon">▦</div>
+
+                <div className="benefitText">
+                  <strong>Follow a simple 14-day action plan</strong>
+                  <span>(15 mins/day)</span>
+                </div>
+              </div>
+
+              <div className="benefit">
+                <div className="benefitIcon">▤</div>
+
+                <div className="benefitText">
+                  <strong>Track the habits that affect how you feel</strong>
+                  <span>with a printable daily tracker</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="heroPrice">
               <strong>$19</strong>
               <span>CAD</span>
             </div>
 
-            <a
-  href="https://buy.stripe.com/7sY9AM0cZ6FZ4jVbHK1gs03"
-  className="primaryButton"
->
-  GET THE ENERGY RESET
-</a>
+            <EnergyResetCheckoutLink className="primaryButton">
+              <span>START MY 14-DAY RESET — $19 CAD</span>
+              <span className="buttonArrow">→</span>
+            </EnergyResetCheckoutLink>
 
-            <div className="purchaseNotes">
-              <span>Instant PDF access</span>
-              <span>•</span>
-              <span>Printable</span>
-              <span>•</span>
-              <span>Yours to keep</span>
+            <div className="deliveryRow">
+              <div className="deliveryItem">
+                <div className="deliveryIcon pdfIcon">PDF</div>
+
+                <div>
+                  <strong>Instant</strong>
+                  <span>PDF access</span>
+                </div>
+              </div>
+
+              <div className="deliveryDivider" />
+
+              <div className="deliveryItem">
+                <div className="deliveryIcon">▣</div>
+
+                <div>
+                  <strong>Printable</strong>
+                </div>
+              </div>
+
+              <div className="deliveryDivider" />
+
+              <div className="deliveryItem">
+                <div className="deliveryIcon">↓</div>
+
+                <div>
+                  <strong>Yours</strong>
+                  <span>to keep</span>
+                </div>
+              </div>
             </div>
+
+            <div className="trustRow">
+              <span>Secure checkout</span>
+              <i>•</i>
+              <span>Instant access</span>
+              <i>•</i>
+              <span>One-time payment</span>
+            </div>
+          </div>
+
+          <div className="heroVisual">
+            <Image
+              src="/energy-reset/energy-reset-3d.png"
+              alt="Wonderful-Life 14-Day Energy Reset guide"
+              width={900}
+              height={1200}
+              priority
+              className="heroBook"
+            />
           </div>
         </div>
       </section>
 
-      {/* ACTUAL GUIDE PREVIEWS */}
-      <section className="insideSection">
+      {/* ======================================================
+          FOUR PILLARS
+      ====================================================== */}
+
+      <section className="pillars">
+        <div className="pillarsInner">
+          {pillars.map((pillar, index) => (
+            <div className="pillarGroup" key={pillar.title}>
+              <div className="pillar">
+                <div className="pillarIcon">{pillar.icon}</div>
+                <strong>{pillar.title}</strong>
+              </div>
+
+              {index < pillars.length - 1 && (
+                <div className="pillarDivider" />
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ======================================================
+          LOOK INSIDE
+      ====================================================== */}
+
+      <section className="inside">
         <div className="sectionHeading">
-          <div className="eyebrow">TAKE A LOOK INSIDE</div>
+          <div className="sectionEyebrow">
+            TAKE A LOOK INSIDE
+          </div>
 
           <h2>Real guidance. Beautifully presented.</h2>
 
@@ -104,18 +191,19 @@ export default function EnergyResetPage() {
         <div className="previewGrid">
           {previewCards.map((card) => (
             <article className="previewCard" key={card.title}>
-              <div className="previewImageWrap">
+              <div className="previewImage">
                 <Image
                   src={card.image}
                   alt={card.title}
-                  width={700}
-                  height={1050}
-                  className="previewImage"
+                  width={760}
+                  height={1000}
                 />
               </div>
 
-              <div className="previewCopy">
-                <div className="cardEyebrow">{card.eyebrow}</div>
+              <div className="previewContent">
+                <div className="previewLabel">
+                  {card.eyebrow}
+                </div>
 
                 <h3>{card.title}</h3>
 
@@ -126,158 +214,767 @@ export default function EnergyResetPage() {
         </div>
       </section>
 
-      {/* WIDE VISUAL */}
-      <section className="wideSection">
-        <div className="wideCard">
-          <div className="wideImageWrap">
-            <Image
-              src="/energy-reset/listen-to-your-body.png"
-              alt="Listen to Your Body"
-              width={1200}
-              height={850}
-              className="wideImage"
-            />
-          </div>
+      {/* ======================================================
+          FINAL PURCHASE CTA
+      ====================================================== */}
 
-          <div className="wideCopy">
-            <div className="eyebrow">DAY 14 + BEYOND</div>
-
-            <h2>Listen to your body.</h2>
-
-            <p>
-              Learn what supports your energy, what drains it and which
-              everyday habits are worth carrying forward.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
       <section className="finalCta">
-        <div className="finalCtaInner">
-          <div className="finalCopy">
-            <div className="ctaEyebrow">
-              14-DAY ENERGY RESET
-            </div>
-
-            <h2>Ready to reset your routine?</h2>
-
-            <p>
-              Start today with the complete 25-page Wonderful-Life guide.
-            </p>
+        <div className="finalInner">
+          <div className="finalEyebrow">
+            14-DAY ENERGY RESET
           </div>
 
-          <div className="ctaPurchase">
-            <div className="finalPrice">
-              <strong>$19</strong>
-              <span>CAD</span>
-            </div>
+          <h2>Ready to reset your routine?</h2>
 
-            <button type="button" className="goldButton">
-              START MY 14-DAY RESET
-            </button>
+          <p>
+            Start today with the complete 25-page
+            Wonderful-Life guide.
+          </p>
 
-            <small>
-              One payment · Instant access · Printable · Yours to keep
-            </small>
+          <div className="finalPrice">
+            <strong>$19</strong>
+            <span>CAD</span>
+          </div>
+
+          <EnergyResetCheckoutLink className="finalButton">
+            <span>START MY 14-DAY RESET — $19 CAD</span>
+            <span>→</span>
+          </EnergyResetCheckoutLink>
+
+          <div className="finalTrust">
+            <span>One payment</span>
+            <i>•</i>
+            <span>Instant access</span>
+            <i>•</i>
+            <span>Printable</span>
+            <i>•</i>
+            <span>Yours to keep</span>
           </div>
         </div>
       </section>
 
       <div className="backHome">
-        <Link href="/">← Back to Wonderful-Life</Link>
+        <Link href="/">
+          ← Back to Wonderful-Life
+        </Link>
       </div>
-
-      {/* MOBILE STICKY CTA */}
-     
 
       <style>{`
         .energyPage {
-          background: #f8f5ee;
-          color: #263d32;
+          --green: #073f31;
+          --deep-green: #064332;
+          --gold: #c68a13;
+          --bright-gold: #e5ae28;
+          --cream: #fbf8ef;
+
+          overflow: hidden;
+
+          background: var(--cream);
+
+          color: var(--green);
+
           font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* =========================
+        /* ====================================================
            HERO
-        ========================= */
+        ==================================================== */
 
         .hero {
+          position: relative;
+
+          min-height: 720px;
+
           overflow: hidden;
+
+          background-image:
+            url("/energy-reset/hero-background.png");
+
+          background-size: cover;
+
+          background-position: center 46%;
+
+          background-repeat: no-repeat;
+        }
+
+        /*
+         * Readability layer only.
+         * The photograph remains visible across the whole hero.
+         */
+
+        .heroShade {
+          position: absolute;
+          inset: 0;
+
+          pointer-events: none;
+
           background:
-            radial-gradient(
-              circle at 87% 36%,
-              rgba(106, 138, 86, 0.11),
-              transparent 22%
-            ),
             linear-gradient(
-              110deg,
-              #f7f3e9 0%,
-              #fbfaf6 65%,
-              #f4efe4 100%
+              90deg,
+              rgba(251, 248, 239, 0.93) 0%,
+              rgba(251, 248, 239, 0.86) 31%,
+              rgba(251, 248, 239, 0.55) 48%,
+              rgba(251, 248, 239, 0.12) 68%,
+              rgba(251, 248, 239, 0.02) 100%
             );
         }
 
         .heroInner {
-          max-width: 1220px;
+          position: relative;
+          z-index: 2;
+
+          max-width: 1180px;
+
+          min-height: 720px;
+
           margin: 0 auto;
-          padding: 34px 30px 38px;
+
+          padding: 36px 30px 25px;
 
           display: grid;
-          grid-template-columns: 360px 1fr;
-          gap: 62px;
+
+          grid-template-columns:
+            minmax(0, 56%)
+            minmax(360px, 44%);
+
           align-items: center;
         }
 
-        .coverWrap {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+        /* ====================================================
+           HERO COPY
+        ==================================================== */
 
-        .coverImage {
-          width: 100%;
-          height: auto;
-          max-width: 330px;
+        .heroCopy {
+          position: relative;
+          z-index: 5;
 
-          border-radius: 7px;
-
-          box-shadow:
-            0 18px 42px rgba(40, 60, 47, 0.18);
+          max-width: 650px;
         }
 
         .eyebrow {
-          color: #a68127;
+          margin-bottom: 14px;
+
+          display: flex;
+          align-items: center;
+
+          gap: 11px;
+
+          color: var(--gold);
 
           font-size: 11px;
-          line-height: 1.2;
-
-          letter-spacing: 2.6px;
-
           font-weight: 800;
+
+          letter-spacing: 1.5px;
         }
 
-        .heroCopy h1 {
-          margin: 13px 0 14px;
+        .eyebrowLine {
+          width: 40px;
+          height: 1px;
+
+          background: var(--gold);
+        }
+
+        .hero h1 {
+          margin: 0;
 
           font-family:
             Georgia,
             "Times New Roman",
             serif;
 
-          font-size: clamp(48px, 4.5vw, 68px);
+          font-weight: 400;
 
-          line-height: 0.96;
+          line-height: 0.85;
 
-          letter-spacing: -2px;
-
-          font-weight: 500;
-
-          color: #164d37;
+          letter-spacing: -3px;
         }
 
-        .heroCopy h2 {
-          margin: 0 0 14px;
+        .hero h1 span {
+          display: block;
+        }
+
+        .titleGreen {
+          color: var(--green);
+
+          font-size:
+            clamp(68px, 6vw, 90px);
+        }
+
+        .titleGold {
+          color: var(--gold);
+
+          font-size:
+            clamp(68px, 6vw, 90px);
+        }
+
+        .heroPromise {
+          margin: 21px 0 21px;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          color: #123f31;
+
+          font-size: 28px;
+
+          line-height: 1.07;
+
+          font-style: italic;
+
+          text-shadow:
+            0 1px 1px rgba(255,255,255,0.7);
+        }
+
+        /* ====================================================
+           BENEFITS
+        ==================================================== */
+
+        .benefits {
+          max-width: 555px;
+
+          margin-bottom: 12px;
+
+          display: grid;
+
+          gap: 11px;
+        }
+
+        .benefit {
+          display: grid;
+
+          grid-template-columns: 54px 1fr;
+
+          align-items: center;
+
+          gap: 13px;
+        }
+
+        .benefitIcon {
+          width: 54px;
+          height: 54px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 50%;
+
+          background:
+            rgba(242, 245, 216, 0.88);
+
+          border:
+            1px solid rgba(255,255,255,0.45);
+
+          color: #07553b;
+
+          font-size: 27px;
+
+          font-weight: 800;
+
+          backdrop-filter: blur(4px);
+        }
+
+        .benefitText strong,
+        .benefitText span {
+          display: block;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+        }
+
+        .benefitText strong {
+          color: #0b3f30;
+
+          font-size: 20px;
+
+          line-height: 1.06;
+
+          text-shadow:
+            0 1px 1px rgba(255,255,255,0.75);
+        }
+
+        .benefitText span {
+          margin-top: 2px;
+
+          color: #324e43;
+
+          font-size: 16px;
+
+          line-height: 1.08;
+        }
+
+        /* ====================================================
+           PRICE
+        ==================================================== */
+
+        .heroPrice {
+          margin: 10px 0;
+
+          display: flex;
+          align-items: baseline;
+
+          gap: 7px;
+        }
+
+        .heroPrice strong {
+          color: #064735;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          font-size: 63px;
+
+          line-height: 0.9;
+
+          font-weight: 400;
+        }
+
+        .heroPrice span {
+          color: #3e574c;
+
+          font-size: 20px;
+        }
+
+        /* ====================================================
+           HERO CTA
+        ==================================================== */
+
+        .primaryButton,
+        .finalButton {
+          text-decoration: none;
+        }
+
+        .primaryButton {
+          width: min(100%, 610px);
+
+          min-height: 60px;
+
+          padding: 0 24px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 17px;
+
+          border-radius: 999px;
+
+          background:
+            linear-gradient(
+              180deg,
+              #0b8d49 0%,
+              #06763f 100%
+            );
+
+          color: white;
+
+          font-size: 17px;
+
+          font-weight: 800;
+
+          box-shadow:
+            0 9px 22px
+            rgba(4, 78, 46, 0.25);
+
+          transition:
+            transform 160ms ease,
+            box-shadow 160ms ease;
+        }
+
+        .primaryButton:hover {
+          transform: translateY(-2px);
+
+          box-shadow:
+            0 12px 27px
+            rgba(4, 78, 46, 0.31);
+        }
+
+        .buttonArrow {
+          font-size: 26px;
+
+          font-weight: 400;
+        }
+
+        /* ====================================================
+           DELIVERY
+        ==================================================== */
+
+        .deliveryRow {
+          max-width: 600px;
+
+          margin-top: 16px;
+
+          display: grid;
+
+          grid-template-columns:
+            1fr auto
+            1fr auto
+            1fr;
+
+          align-items: center;
+
+          gap: 13px;
+        }
+
+        .deliveryItem {
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 8px;
+        }
+
+        .deliveryIcon {
+          width: 41px;
+          height: 41px;
+
+          flex: 0 0 41px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          border:
+            1.5px solid #07553d;
+
+          border-radius: 50%;
+
+          background:
+            rgba(251,248,239,0.5);
+
+          color: #07553d;
+
+          font-size: 18px;
+
+          font-weight: 800;
+        }
+
+        .pdfIcon {
+          border-radius: 5px;
+
+          font-size: 9px;
+        }
+
+        .deliveryItem strong,
+        .deliveryItem span {
+          display: block;
+        }
+
+        .deliveryItem strong {
+          color: #123f31;
+
+          font-size: 14px;
+        }
+
+        .deliveryItem span {
+          color: #40564c;
+
+          font-size: 12px;
+        }
+
+        .deliveryDivider {
+          width: 1px;
+          height: 38px;
+
+          background:
+            rgba(7,63,49,0.23);
+        }
+
+        .trustRow {
+          max-width: 600px;
+
+          margin-top: 10px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          flex-wrap: wrap;
+
+          gap: 7px;
+
+          color: #354e43;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          font-size: 13px;
+        }
+
+        .trustRow i {
+          color: #73837b;
+
+          font-style: normal;
+        }
+
+        /* ====================================================
+           3D PRODUCT
+        ==================================================== */
+
+        .heroVisual {
+          position: relative;
+
+          min-height: 600px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+        }
+
+        .heroBook {
+          position: relative;
+
+          z-index: 3;
+
+          width: 100%;
+
+          max-width: 500px;
+
+          height: auto;
+
+          object-fit: contain;
+
+          filter:
+            drop-shadow(
+              0 24px 27px
+              rgba(8, 39, 29, 0.30)
+            );
+        }
+
+        /* ====================================================
+           PILLARS
+        ==================================================== */
+
+        .pillars {
+          border-top:
+            1px solid #e1dccf;
+
+          border-bottom:
+            1px solid #ded9cd;
+
+          background:
+            rgba(250,247,237,0.98);
+        }
+
+        .pillarsInner {
+          max-width: 1000px;
+
+          min-height: 86px;
+
+          margin: 0 auto;
+
+          padding: 0 22px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+        }
+
+        .pillarGroup {
+          flex: 1;
+
+          display: flex;
+
+          align-items: center;
+        }
+
+        .pillar {
+          flex: 1;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 9px;
+        }
+
+        .pillarIcon {
+          width: 43px;
+          height: 43px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          border-radius: 50%;
+
+          background: #e8eedc;
+
+          color: #07553b;
+
+          font-size: 19px;
+        }
+
+        .pillar strong {
+          color: #17473a;
+
+          font-size: 10px;
+
+          letter-spacing: 1.3px;
+        }
+
+        .pillarDivider {
+          width: 1px;
+          height: 43px;
+
+          background: #d3cec1;
+        }
+
+        /* ====================================================
+           LOOK INSIDE
+        ==================================================== */
+
+        .inside {
+          padding:
+            38px 24px 52px;
+
+          background:
+            linear-gradient(
+              180deg,
+              #fbf8ef 0%,
+              #f8f4e9 100%
+            );
+        }
+
+        .sectionHeading {
+          margin:
+            0 auto 22px;
+
+          text-align: center;
+        }
+
+        .sectionEyebrow {
+          color: var(--gold);
+
+          font-size: 11px;
+
+          font-weight: 800;
+
+          letter-spacing: 2.3px;
+        }
+
+        .sectionHeading h2 {
+          margin: 8px 0 4px;
+
+          color: #094838;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          font-size: 42px;
+
+          line-height: 1;
+
+          font-weight: 400;
+        }
+
+        .sectionHeading p {
+          margin: 0;
+
+          color: #58665f;
+
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          font-size: 18px;
+        }
+
+        .previewGrid {
+          max-width: 1090px;
+
+          margin: 0 auto;
+
+          display: grid;
+
+          grid-template-columns:
+            repeat(3, 1fr);
+
+          gap: 17px;
+        }
+
+        .previewCard {
+          overflow: hidden;
+
+          border:
+            1px solid #dfd9cc;
+
+          border-radius: 10px;
+
+          background: #fffefa;
+
+          box-shadow:
+            0 10px 27px
+            rgba(49,60,52,0.08);
+        }
+
+        .previewImage {
+          height: 325px;
+
+          overflow: hidden;
+
+          background: #f3efe5;
+        }
+
+        .previewImage img {
+          width: 100%;
+          height: 100%;
+
+          object-fit: cover;
+
+          object-position: top;
+        }
+
+        .previewContent {
+          padding:
+            14px 16px 18px;
+        }
+
+        .previewLabel {
+          display: inline-flex;
+
+          min-height: 23px;
+
+          padding: 0 12px;
+
+          align-items: center;
+
+          border-radius: 999px;
+
+          background: #07603f;
+
+          color: white;
+
+          font-size: 8px;
+
+          font-weight: 800;
+
+          letter-spacing: 0.7px;
+        }
+
+        .previewContent h3 {
+          margin: 9px 0 5px;
+
+          color: #0b4637;
 
           font-family:
             Georgia,
@@ -286,720 +983,620 @@ export default function EnergyResetPage() {
 
           font-size: 24px;
 
-          line-height: 1.25;
+          line-height: 1;
 
-          font-weight: 500;
-
-          color: #275743;
+          font-weight: 600;
         }
 
-        .heroDescription {
-          max-width: 610px;
+        .previewContent p {
+          margin: 0;
 
-          margin: 0 0 16px;
+          color: #526158;
 
-          font-size: 16px;
+          font-size: 12px;
 
-          line-height: 1.55;
-
-          color: #586760;
+          line-height: 1.4;
         }
 
-        .priceRow {
-          display: flex;
+        /* ====================================================
+           FINAL CTA
+        ==================================================== */
 
-          gap: 9px;
+        .finalCta {
+          position: relative;
 
-          align-items: baseline;
+          padding:
+            53px 24px 50px;
 
-          margin: 0 0 14px;
+          background:
+            linear-gradient(
+              135deg,
+              #0c503b 0%,
+              #07503a 50%,
+              #064330 100%
+            );
+
+          color: white;
         }
 
-        .priceRow strong,
-        .finalPrice strong {
+        .finalInner {
+          max-width: 750px;
+
+          margin: 0 auto;
+
+          text-align: center;
+        }
+
+        .finalEyebrow {
+          color: #e4ad27;
+
+          font-size: 11px;
+
+          font-weight: 800;
+
+          letter-spacing: 2.4px;
+        }
+
+        .finalCta h2 {
+          margin: 10px 0 9px;
+
+          color: white;
+
           font-family:
             Georgia,
             "Times New Roman",
             serif;
 
-          font-size: 40px;
+          font-size: 44px;
 
           line-height: 1;
 
-          color: #164d37;
-        }
-
-        .priceRow span,
-        .finalPrice span {
-          color: #657269;
-
-          font-size: 14px;
-        }
-
-        .primaryButton,
-        .goldButton {
-          border: 0;
-
-          border-radius: 999px;
-
-          min-height: 50px;
-
-          padding: 0 32px;
-
-          font-size: 14px;
-
-          font-weight: 800;
-
-          letter-spacing: 0.6px;
-
-          cursor: pointer;
-        }
-
-        .primaryButton {
-          min-width: 365px;
-
-          background: #1f5a42;
-
-          color: white;
-
-          box-shadow:
-            0 7px 18px rgba(31, 90, 66, 0.16);
-        }
-
-        .purchaseNotes {
-          margin-top: 12px;
-
-          display: flex;
-
-          gap: 9px;
-
-          flex-wrap: wrap;
-
-          font-size: 12px;
-
-          color: #6d776f;
-        }
-
-        /* =========================
-           GUIDE PREVIEW
-        ========================= */
-
-        .insideSection {
-          padding: 44px 24px 48px;
-
-          background: #fbfaf6;
-        }
-
-        .sectionHeading {
-          text-align: center;
-
-          max-width: 720px;
-
-          margin: 0 auto 28px;
-        }
-
-        .sectionHeading h2,
-        .wideCopy h2,
-        .finalCta h2 {
-          font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-
-          color: #174f39;
-
-          font-weight: 500;
-        }
-
-        .sectionHeading h2 {
-          margin: 9px 0 7px;
-
-          font-size: clamp(31px, 3vw, 42px);
-        }
-
-        .sectionHeading p {
-          margin: 0;
-
-          font-size: 15px;
-
-          color: #69756e;
-        }
-
-        .previewGrid {
-          max-width: 1240px;
-
-          margin: 0 auto;
-
-          display: grid;
-
-          grid-template-columns: repeat(4, 1fr);
-
-          gap: 15px;
-        }
-
-        .previewCard {
-          overflow: hidden;
-
-          background: white;
-
-          border-radius: 13px;
-
-          border: 1px solid #ece7dc;
-
-          box-shadow:
-            0 8px 20px rgba(50, 62, 54, 0.06);
-        }
-
-        .previewImageWrap {
-          width: 100%;
-
-          aspect-ratio: 9 / 12;
-
-          overflow: hidden;
-
-          background: #eeeae1;
-        }
-
-        .previewImage {
-          width: 100%;
-
-          height: 100%;
-
-          object-fit: cover;
-
-          object-position: top;
-        }
-
-        .previewCopy {
-          padding: 14px 15px 16px;
-        }
-
-        .cardEyebrow {
-          margin-bottom: 6px;
-
-          color: #a68127;
-
-          font-size: 9px;
-
-          letter-spacing: 1.6px;
-
-          font-weight: 800;
-        }
-
-        .previewCopy h3 {
-          margin: 0 0 6px;
-
-          font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-
-          color: #174f39;
-
-          font-size: 19px;
-
-          line-height: 1.08;
-
-          font-weight: 500;
-        }
-
-        .previewCopy p {
-          margin: 0;
-
-          color: #657269;
-
-          font-size: 12px;
-
-          line-height: 1.45;
-        }
-
-        /* =========================
-           LISTEN TO YOUR BODY
-        ========================= */
-
-        .wideSection {
-          padding: 0 24px 48px;
-
-          background: #fbfaf6;
-        }
-
-        .wideCard {
-          max-width: 1240px;
-
-          height: 310px;
-
-          margin: 0 auto;
-
-          overflow: hidden;
-
-          display: grid;
-
-          grid-template-columns: 1.35fr 0.65fr;
-
-          background: #edf3ee;
-
-          border-radius: 18px;
-        }
-
-        .wideImageWrap {
-          height: 310px;
-
-          overflow: hidden;
-        }
-
-        .wideImage {
-          width: 100%;
-
-          height: 100%;
-
-          object-fit: cover;
-
-          object-position: center top;
-        }
-
-        .wideCopy {
-          padding: 34px 38px;
-
-          display: flex;
-
-          flex-direction: column;
-
-          justify-content: center;
-        }
-
-        .wideCopy h2 {
-          margin: 10px 0 13px;
-
-          font-size: 36px;
-
-          line-height: 1.02;
-        }
-
-        .wideCopy p {
-          margin: 0;
-
-          color: #58685f;
-
-          font-size: 15px;
-
-          line-height: 1.55;
-        }
-
-        /* =========================
-           FINAL CTA
-        ========================= */
-
-        .finalCta {
-          padding: 36px 26px;
-
-          background: #154d37;
-
-          color: white;
-        }
-
-        .finalCtaInner {
-          max-width: 1120px;
-
-          margin: 0 auto;
-
-          display: grid;
-
-          grid-template-columns: 1fr 410px;
-
-          gap: 45px;
-
-          align-items: center;
-        }
-
-        .ctaEyebrow {
-          margin-bottom: 8px;
-
-          color: #dbb65a;
-
-          font-size: 10px;
-
-          letter-spacing: 2.2px;
-
-          font-weight: 800;
-        }
-
-        .finalCta h2 {
-          margin: 0 0 7px;
-
-          color: white;
-
-          font-size: 36px;
+          font-weight: 400;
         }
 
         .finalCta p {
-          margin: 0;
+          margin: 0 0 17px;
 
-          color: #d7e3dc;
+          color: #e2ede7;
 
           font-size: 15px;
         }
 
-        .ctaPurchase {
-          text-align: center;
-        }
-
         .finalPrice {
-          margin-bottom: 11px;
+          margin-bottom: 17px;
+
+          display: flex;
+
+          justify-content: center;
+          align-items: baseline;
+
+          gap: 5px;
         }
 
         .finalPrice strong {
           color: white;
 
-          font-size: 36px;
+          font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+          font-size: 52px;
+
+          font-weight: 400;
+
+          line-height: 0.9;
         }
 
         .finalPrice span {
-          color: #d3ded7;
+          color: #d9e6df;
+
+          font-size: 17px;
         }
 
-        .goldButton {
-          width: 100%;
+        .finalButton {
+          width:
+            min(100%, 540px);
 
-          background: #d7a92d;
+          min-height: 56px;
+
+          margin: 0 auto;
+
+          padding: 0 25px;
+
+          display: flex;
+
+          align-items: center;
+          justify-content: center;
+
+          gap: 16px;
+
+          border-radius: 999px;
+
+          background:
+            linear-gradient(
+              180deg,
+              #ebb62e 0%,
+              #dda51e 100%
+            );
 
           color: white;
+
+          font-size: 14px;
+
+          font-weight: 800;
+
+          box-shadow:
+            0 8px 21px
+            rgba(0,0,0,0.16);
         }
 
-        .ctaPurchase small {
-          display: block;
+        .finalTrust {
+          margin-top: 14px;
 
-          margin-top: 9px;
+          display: flex;
 
-          color: #d2ddd7;
+          justify-content: center;
 
-          font-size: 10px;
+          flex-wrap: wrap;
+
+          gap: 7px;
+
+          color: #dbe7e1;
+
+          font-size: 11px;
+        }
+
+        .finalTrust i {
+          color: #92b1a2;
+
+          font-style: normal;
         }
 
         .backHome {
-          padding: 17px;
+          padding: 16px;
+
+          background: #053b2d;
 
           text-align: center;
-
-          background: #103e2d;
         }
 
         .backHome a {
-          color: #e3ece6;
+          color: #dce9e2;
 
           text-decoration: none;
 
           font-size: 12px;
         }
 
-        /* =========================
-           MOBILE STICKY CTA
-        ========================= */
-
-        .mobileSticky {
-          display: none;
-        }
-
-        /* =========================
+        /* ====================================================
            TABLET
-        ========================= */
+        ==================================================== */
 
-        @media (max-width: 900px) {
+        @media (
+          min-width: 651px
+        ) and (
+          max-width: 900px
+        ) {
           .heroInner {
-            grid-template-columns: 285px 1fr;
+            grid-template-columns:
+              56% 44%;
 
-            gap: 32px;
+            padding-left: 20px;
+
+            padding-right: 15px;
           }
 
-          .coverImage {
-            max-width: 270px;
+          .hero h1 span {
+            font-size: 64px;
           }
 
-          .previewGrid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-
-          .wideCard {
-            grid-template-columns: 1fr 0.75fr;
-          }
-
-          .finalCtaInner {
-            grid-template-columns: 1fr;
-            gap: 20px;
+          .heroBook {
+            width: 110%;
           }
         }
 
-        /* =========================
+        /* ====================================================
            MOBILE
-        ========================= */
+           
+           IMPORTANT:
+           The photograph does NOT create the hero height.
+           The content creates the height.
+           background-size: cover fills that height.
+        ==================================================== */
 
         @media (max-width: 650px) {
-  .energyPage {
-    padding-bottom: 65px;
-  }
+          .hero {
+            min-height: auto;
 
-  .heroInner {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 18px 14px 22px;
-    align-items: center;
-  }
+            background-image:
+              url("/energy-reset/hero-background.png");
 
-  .coverWrap {
-    width: 100%;
-  }
+            background-size: cover;
 
-  .coverImage {
-    max-width: 340px;
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
+            /*
+             * Vertical source image:
+             * keep the mountains / water visible
+             * rather than anchoring to the bottom rocks.
+             */
+            background-position:
+              center 32%;
 
-  .heroCopy {
-    width: 100%;
-    text-align: center;
-  }
-
-  .eyebrow {
-    font-size: 8px;
-    letter-spacing: 1.4px;
-  }
-
-  .heroCopy h1 {
-    margin: 8px 0 8px;
-    font-size: 38px;
-    line-height: 0.95;
-    letter-spacing: -1px;
-  }
-
-  .heroCopy h2 {
-    margin-bottom: 8px;
-    font-size: 17px;
-  }
-
-  .heroDescription {
-    display: none;
-  }
-
-  .priceRow {
-    justify-content: center;
-    margin-bottom: 8px;
-  }
-
-  .priceRow strong {
-    font-size: 30px;
-  }
-
-  .priceRow span {
-    font-size: 11px;
-  }
-
-  .primaryButton {
-    width: 100%;
-    min-width: 0;
-    min-height: 43px;
-    padding: 0 10px;
-    font-size: 11px;
-  }
-
-  .purchaseNotes {
-    justify-content: center;
-    margin-top: 7px;
-    gap: 5px;
-    font-size: 9px;
-  }
-}
-
-          .insideSection {
-            padding: 30px 10px 30px;
+            background-repeat:
+              no-repeat;
           }
 
-          .sectionHeading {
-            margin-bottom: 18px;
+          .heroShade {
+            background:
+              linear-gradient(
+                90deg,
+                rgba(251,248,239,0.90) 0%,
+                rgba(251,248,239,0.82) 43%,
+                rgba(251,248,239,0.34) 68%,
+                rgba(251,248,239,0.08) 100%
+              );
           }
 
-          .sectionHeading h2 {
-            margin: 7px 0 5px;
+          .heroInner {
+            min-height: auto;
 
-            font-size: 28px;
+            margin: 0;
 
-            line-height: 1;
+            padding:
+              23px 10px 20px;
+
+            grid-template-columns:
+              57% 43%;
+
+            align-items: center;
           }
 
-          .sectionHeading p {
-            font-size: 12px;
+          .heroCopy {
+            max-width: none;
           }
 
-          .previewGrid {
-            grid-template-columns: repeat(2, 1fr);
+          .eyebrow {
+            margin-bottom: 8px;
 
+            gap: 5px;
+
+            white-space: nowrap;
+
+            font-size: 6.3px;
+
+            letter-spacing: 0.55px;
+          }
+
+          .eyebrowLine {
+            width: 18px;
+          }
+
+          .hero h1 {
+            line-height: 0.87;
+
+            letter-spacing: -1.25px;
+          }
+
+          .titleGreen,
+          .titleGold {
+            font-size:
+              clamp(
+                40px,
+                11.2vw,
+                51px
+              );
+          }
+
+          .heroPromise {
+            margin:
+              10px 0 12px;
+
+            font-size: 17px;
+
+            line-height: 1.04;
+          }
+
+          .benefits {
             gap: 8px;
+
+            margin-bottom: 7px;
           }
 
-          .previewCard {
-            border-radius: 9px;
+          .benefit {
+            grid-template-columns:
+              34px 1fr;
+
+            gap: 7px;
           }
 
-          .previewImageWrap {
-            aspect-ratio: 9 / 12;
+          .benefitIcon {
+            width: 34px;
+            height: 34px;
+
+            font-size: 17px;
+
+            backdrop-filter:
+              blur(3px);
           }
 
-          .previewCopy {
-            padding: 10px 9px 11px;
+          .benefitText strong {
+            font-size: 11.7px;
+
+            line-height: 1.03;
           }
 
-          .cardEyebrow {
-            font-size: 8px;
+          .benefitText span {
+            margin-top: 1px;
+
+            font-size: 9.8px;
+
+            line-height: 1.03;
           }
 
-          .previewCopy h3 {
-            font-size: 15px;
+          .heroPrice {
+            margin: 7px 0;
+
+            gap: 4px;
           }
 
-          .previewCopy p {
-            font-size: 10px;
-
-            line-height: 1.35;
+          .heroPrice strong {
+            font-size: 46px;
           }
 
-          .wideSection {
-            padding: 0 10px 30px;
-          }
-
-          .wideCard {
-            height: auto;
-
-            display: grid;
-
-            grid-template-columns: 1.2fr 0.8fr;
-
-            border-radius: 11px;
-          }
-
-          .wideImageWrap {
-            height: 220px;
-          }
-
-          .wideCopy {
-            padding: 18px 14px;
-          }
-
-          .wideCopy h2 {
-            margin: 7px 0 8px;
-
-            font-size: 24px;
-          }
-
-          .wideCopy p {
-            font-size: 11px;
-
-            line-height: 1.4;
-          }
-
-          .finalCta {
-            padding: 26px 16px;
-          }
-
-          .finalCtaInner {
-            gap: 18px;
-
-            text-align: center;
-          }
-
-          .finalCta h2 {
-            font-size: 30px;
-          }
-
-          .finalCta p {
+          .heroPrice span {
             font-size: 13px;
           }
 
+          .primaryButton {
+            min-height: 43px;
+
+            padding: 0 8px;
+
+            gap: 6px;
+
+            font-size: 9.2px;
+          }
+
+          .buttonArrow {
+            font-size: 18px;
+          }
+
+          /* PRODUCT */
+
+          .heroVisual {
+            min-height: 0;
+
+            align-self: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+          }
+
+          .heroBook {
+            width: 108%;
+
+            max-width: none;
+
+            transform:
+              translateX(3%);
+
+            filter:
+              drop-shadow(
+                0 12px 14px
+                rgba(7,37,27,0.29)
+              );
+          }
+
+          /* DELIVERY */
+
+          .deliveryRow {
+            margin-top: 11px;
+
+            gap: 5px;
+          }
+
+          .deliveryItem {
+            gap: 4px;
+          }
+
+          .deliveryIcon {
+            width: 29px;
+            height: 29px;
+
+            flex-basis: 29px;
+
+            font-size: 12px;
+
+            background:
+              rgba(251,248,239,0.62);
+          }
+
+          .pdfIcon {
+            font-size: 6px;
+          }
+
+          .deliveryItem strong {
+            font-size: 8.7px;
+          }
+
+          .deliveryItem span {
+            font-size: 7.7px;
+          }
+
+          .deliveryDivider {
+            height: 27px;
+          }
+
+          .trustRow {
+            margin-top: 7px;
+
+            gap: 4px;
+
+            font-size: 7.8px;
+          }
+
+          /* PILLARS */
+
+          .pillarsInner {
+            min-height: 60px;
+
+            padding: 0 5px;
+          }
+
+          .pillar {
+            gap: 4px;
+          }
+
+          .pillarIcon {
+            width: 29px;
+            height: 29px;
+
+            font-size: 13px;
+          }
+
+          .pillar strong {
+            font-size: 6px;
+
+            letter-spacing: 0.45px;
+          }
+
+          .pillarDivider {
+            height: 31px;
+          }
+
+          /* LOOK INSIDE */
+
+          .inside {
+            padding:
+              22px 7px 29px;
+          }
+
+          .sectionHeading {
+            margin-bottom: 14px;
+          }
+
+          .sectionEyebrow {
+            font-size: 7px;
+
+            letter-spacing: 1.4px;
+          }
+
+          .sectionHeading h2 {
+            margin: 5px 0 3px;
+
+            font-size: 25px;
+          }
+
+          .sectionHeading p {
+            font-size: 11px;
+          }
+
+          .previewGrid {
+            grid-template-columns:
+              repeat(3, 1fr);
+
+            gap: 6px;
+          }
+
+          .previewCard {
+            border-radius: 7px;
+          }
+
+          .previewImage {
+            height: 150px;
+          }
+
+          .previewContent {
+            padding:
+              7px 6px 9px;
+          }
+
+          .previewLabel {
+            min-height: 16px;
+
+            padding: 0 6px;
+
+            font-size: 5px;
+
+            letter-spacing: 0.3px;
+          }
+
+          .previewContent h3 {
+            margin: 5px 0 3px;
+
+            font-size: 11px;
+          }
+
+          .previewContent p {
+            font-size: 6.4px;
+
+            line-height: 1.25;
+          }
+
+          /* FINAL CTA */
+
+          .finalCta {
+            padding:
+              33px 14px 30px;
+          }
+
+          .finalEyebrow {
+            font-size: 7px;
+
+            letter-spacing: 1.5px;
+          }
+
+          .finalCta h2 {
+            margin: 7px 0;
+
+            font-size: 31px;
+          }
+
+          .finalCta p {
+            margin-bottom: 13px;
+
+            font-size: 11px;
+          }
+
           .finalPrice {
-            margin-bottom: 8px;
+            margin-bottom: 13px;
           }
 
           .finalPrice strong {
-            font-size: 32px;
+            font-size: 43px;
           }
 
-          .goldButton {
-            min-height: 46px;
+          .finalPrice span {
+            font-size: 13px;
+          }
 
-            font-size: 12px;
+          .finalButton {
+            min-height: 49px;
+
+            padding: 0 11px;
+
+            gap: 8px;
+
+            font-size: 10.3px;
+          }
+
+          .finalTrust {
+            margin-top: 11px;
+
+            gap: 4px;
+
+            font-size: 7.8px;
           }
 
           .backHome {
             padding: 14px;
           }
 
-          .mobileSticky {
-            position: fixed;
-
-            left: 0;
-            right: 0;
-            bottom: 0;
-
-            z-index: 999;
-
-            height: 64px;
-
-            padding: 8px 12px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            background: rgba(20, 77, 55, 0.97);
-
-            box-shadow:
-              0 -4px 18px rgba(0, 0, 0, 0.14);
-
-            backdrop-filter: blur(8px);
-          }
-
-          .mobileSticky > div {
-            display: flex;
-
-            flex-direction: column;
-
-            color: white;
-          }
-
-          .mobileSticky strong {
-            font-size: 12px;
-          }
-
-          .mobileSticky span {
-            margin-top: 2px;
-
-            color: #e3c66d;
-
-            font-size: 12px;
-
-            font-weight: 700;
-          }
-
-          .mobileSticky button {
-            min-width: 92px;
-
-            min-height: 42px;
-
-            border: 0;
-
-            border-radius: 999px;
-
-            background: #d7a92d;
-
-            color: white;
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            cursor: pointer;
+          .backHome a {
+            font-size: 10px;
           }
         }
       `}</style>
