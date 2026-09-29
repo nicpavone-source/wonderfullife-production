@@ -59,9 +59,9 @@ const questions = [
     question: "How can I lose weight without going on another diet?",
     answer:
       "Sustainable weight management usually works better when the focus shifts away from extreme restriction and toward habits you can repeat: satisfying meals, adequate protein and fibre, sensible portions, movement and consistency.",
-    product: "21-Day Eat Better Reset",
+    product: "The 14-Day Eat Better Reset",
     productText:
-      "Simple meals, grocery guidance, portion strategies and practical daily habits.",
+      "Simple meals, grocery guidance, portion strategies and practical daily habits designed to help you eat better without another restrictive diet.",
   },
   {
     id: "gut",
@@ -86,7 +86,7 @@ const questions = [
     question: "How do I start eating healthier without changing everything?",
     answer:
       "Improve the meals you already eat rather than trying to replace your entire diet overnight. Add protein, vegetables or fruit, fibre-rich foods and water. Small improvements repeated consistently are far more useful than chasing perfection.",
-    product: "21-Day Eat Better Reset",
+    product: "The 14-Day Eat Better Reset",
     productText:
       "A step-by-step system for making healthy eating practical instead of overwhelming.",
   },
@@ -102,7 +102,7 @@ const questions = [
     question: "How do I stop craving sugar?",
     answer:
       "Sugar cravings can become stronger when meals are skipped or are not satisfying. Regular meals containing protein, fibre and healthy fats can help. Sleep, stress and habitual snacking can also play a role.",
-    product: "21-Day Eat Better Reset",
+    product: "The 14-Day Eat Better Reset",
     productText:
       "Build more satisfying meals and a healthier daily eating rhythm.",
   },
@@ -110,7 +110,7 @@ const questions = [
     question: "What should I eat when I'm always hungry?",
     answer:
       "Meals that combine protein, fibre-rich foods, vegetables or fruit and some healthy fat tend to be more satisfying than highly refined foods eaten alone. Meal timing and adequate overall food intake matter too.",
-    product: "21-Day Eat Better Reset",
+    product: "The 14-Day Eat Better Reset",
     productText:
       "Meal ideas and planning tools designed around satisfying, realistic eating.",
   },
@@ -1188,9 +1188,19 @@ export default function AskZoeyPage() {
             {item.productText}
           </p>
 
-          <span className="coming">
-            Wonderful-Life Guide — Coming Soon
-          </span>
+         {item.id === "weight" ? (
+  <a
+    className="coming"
+    href="/eat-better-reset"
+    style={{ textDecoration: "none" }}
+  >
+    Explore the 14-Day Eat Better Reset →
+  </a>
+) : (
+  <span className="coming">
+    Wonderful-Life Guide — Coming Soon
+  </span>
+)}
         </div>
       </div>
     </details>
@@ -1239,9 +1249,19 @@ export default function AskZoeyPage() {
                   {item.productText}
                 </p>
 
-                <span className="coming">
-                  Wonderful-Life Guide — Coming Soon
-                </span>
+              {item.id === "weight" ? (
+  <a
+    className="coming"
+    href="/eat-better-reset"
+    style={{ textDecoration: "none" }}
+  >
+    Explore the 14-Day Eat Better Reset →
+  </a>
+) : (
+  <span className="coming">
+    Wonderful-Life Guide — Coming Soon
+  </span>
+)}
               </div>
             </div>
           </details>
