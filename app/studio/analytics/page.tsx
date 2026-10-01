@@ -386,7 +386,7 @@ export default async function AnalyticsPage() {
     unreadLeads,
     unreadMessages,
     energyResetViewsResult,
-    checkoutStartsResult,
+    buyClicksResult,
     recentEventsResult,
     recentCommentsResult,
     recentLeadsResult,
@@ -528,7 +528,7 @@ export default async function AnalyticsPage() {
       })
       .eq(
         "event_type",
-        "checkout_start"
+        "buy_click"
       ),
 
     supabase
@@ -690,8 +690,8 @@ export default async function AnalyticsPage() {
   const energyResetViews =
     energyResetViewsResult.count ?? 0;
 
-  const checkoutStarts =
-    checkoutStartsResult.count ?? 0;
+  const buyClicks =
+    buyClicksResult.count ?? 0;
 
   const recentEvents =
     (recentEventsResult.data as
@@ -1798,12 +1798,12 @@ export default async function AnalyticsPage() {
 
             <div className="analytics-funnel-metric analytics-funnel-metric--checkout">
               <div className="analytics-funnel-metric__label">
-                Checkout
+                Buy Clicks
               </div>
 
               <div className="analytics-funnel-metric__value">
                 {formatNumber(
-                  checkoutStarts
+                  buyClicks
                 )}
               </div>
             </div>
@@ -1928,7 +1928,7 @@ export default async function AnalyticsPage() {
                   <span
                     className={
                       event.event_type ===
-                      "checkout_start"
+                      "buy_click"
                         ? "analytics-activity__dot analytics-activity__dot--checkout"
                         : "analytics-activity__dot"
                     }

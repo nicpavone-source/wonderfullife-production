@@ -27,7 +27,7 @@ export default function EnergyResetCheckoutLink({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            event_type: "checkout_start",
+            event_type: "buy_click",
             page_path: "/energy-reset",
             content_id: null,
             content_type: "digital_product",
@@ -48,7 +48,7 @@ export default function EnergyResetCheckoutLink({
       ]);
     } catch (error) {
       console.error(
-        "Unable to record checkout start:",
+        "Unable to record Energy Reset buy click:",
         error
       );
     } finally {
