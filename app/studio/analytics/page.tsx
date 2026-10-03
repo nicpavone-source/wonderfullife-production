@@ -199,6 +199,10 @@ function pageLabel(path: string) {
     return "Energy Reset";
   }
 
+  if (path === "/eat-better-reset") {
+    return "Eat Better Reset";
+  }
+
   if (path === "/recipes") {
     return "Recipes";
   }
@@ -386,7 +390,9 @@ export default async function AnalyticsPage() {
     unreadLeads,
     unreadMessages,
     energyResetViewsResult,
-    buyClicksResult,
+    eatBetterResetViewsResult,
+    energyResetBuyClicksResult,
+    eatBetterResetBuyClicksResult,
     recentEventsResult,
     recentCommentsResult,
     recentLeadsResult,
@@ -528,7 +534,41 @@ export default async function AnalyticsPage() {
       })
       .eq(
         "event_type",
+        "page_view"
+      )
+      .eq(
+        "page_path",
+        "/eat-better-reset"
+      ),
+
+    supabase
+      .from("analytics_events")
+      .select("*", {
+        count: "exact",
+        head: true,
+      })
+      .eq(
+        "event_type",
         "buy_click"
+      )
+      .eq(
+        "page_path",
+        "/energy-reset"
+      ),
+
+    supabase
+      .from("analytics_events")
+      .select("*", {
+        count: "exact",
+        head: true,
+      })
+      .eq(
+        "event_type",
+        "buy_click"
+      )
+      .eq(
+        "page_path",
+        "/eat-better-reset"
       ),
 
     supabase
@@ -552,8 +592,7 @@ export default async function AnalyticsPage() {
         }
       )
       .limit(20),
-
-    supabase
+          supabase
       .from("content_comments")
       .select(
         "id,content_item_id,user_id,content,created_at,is_hidden,is_pinned"
@@ -690,8 +729,14 @@ export default async function AnalyticsPage() {
   const energyResetViews =
     energyResetViewsResult.count ?? 0;
 
-  const buyClicks =
-    buyClicksResult.count ?? 0;
+  const eatBetterResetViews =
+    eatBetterResetViewsResult.count ?? 0;
+
+  const energyResetBuyClicks =
+    energyResetBuyClicksResult.count ?? 0;
+
+  const eatBetterResetBuyClicks =
+    eatBetterResetBuyClicksResult.count ?? 0;
 
   const recentEvents =
     (recentEventsResult.data as
@@ -728,14 +773,79 @@ export default async function AnalyticsPage() {
       | ContentRow[]
       | null) ?? [];
 
+  function purchaseSearchText(
+    purchase: PurchaseRow
+  ) {
+    return [
+      purchase.product_name,
+      purchase.event_label,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+  }
+
+  const eatBetterPurchases =
+    purchases.filter((purchase) => {
+      const text =
+        purchaseSearchText(purchase);
+
+      return (
+        text.includes("eat better") ||
+        text.includes("eat-better") ||
+        text.includes("eat_better")
+      );
+    });
+
+  const energyResetPurchases =
+    purchases.filter((purchase) => {
+      const text =
+        purchaseSearchText(purchase);
+
+      if (
+        text.includes("eat better") ||
+        text.includes("eat-better") ||
+        text.includes("eat_better")
+      ) {
+        return false;
+      }
+
+      return (
+        text.includes("energy reset") ||
+        text.includes("energy-reset") ||
+        text.includes("energy_reset")
+      );
+    });
+
+  const energyResetRevenueCents =
+    energyResetPurchases.reduce(
+      (total, purchase) =>
+        total +
+        (purchase.amount_cents ?? 0),
+      0
+    );
+
+  const eatBetterResetRevenueCents =
+    eatBetterPurchases.reduce(
+      (total, purchase) =>
+        total +
+        (purchase.amount_cents ?? 0),
+      0
+    );
+
   const totalRevenueCents =
     purchases.reduce(
       (total, purchase) =>
         total +
-        (purchase.amount_cents ??
-          0),
+        (purchase.amount_cents ?? 0),
       0
     );
+
+  const energyResetRevenue =
+    energyResetRevenueCents / 100;
+
+  const eatBetterResetRevenue =
+    eatBetterResetRevenueCents / 100;
 
   const totalRevenue =
     totalRevenueCents / 100;
@@ -1295,97 +1405,98 @@ export default async function AnalyticsPage() {
           );
         })}
       </section>
-
-      {/* CHART + TOP CONTENT */}
+            {/* TRAFFIC OVERVIEW */}
 
       <section className="analytics-main-grid">
-        <article className="analytics-card analytics-chart-card">
-          <div className="analytics-chart-card__header">
+        <article className="analytics-card analytics-traffic-card">
+          <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
-                Visitor Activity
+                Traffic Overview
               </h2>
 
-              <p className="analytics-card__description">
-                Public page views ·
-                Studio activity excluded
+              <p className="analytics-card__subtitle">
+                Public page views over the last 30 days
               </p>
             </div>
 
-            <div className="analytics-chart-card__total">
-              <div className="analytics-chart-card__number">
-                {formatNumber(
-                  thirtyDayViews
-                )}
-              </div>
-
-              <div className="analytics-chart-card__today">
-                {formatNumber(
-                  todayViews
-                )}{" "}
-                today
-              </div>
+            <div className="analytics-card__metric">
+              <strong>
+                {formatNumber(thirtyDayViews)}
+              </strong>
+              <span>views</span>
             </div>
           </div>
 
-          <div className="analytics-chart-legend">
-            <span className="analytics-chart-legend__item">
-              <span className="analytics-chart-legend__dot" />
-              Page Views
-            </span>
-
-            <span>
-              Last 30 days
-            </span>
-          </div>
-
           <div className="analytics-chart">
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              aria-label="Page views over the last 30 days"
-            >
-              <defs>
-                <linearGradient
-                  id="analyticsArea"
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="1"
-                >
-                  <stop
-                    offset="0%"
-                    stopColor="#6da36b"
-                    stopOpacity="0.24"
+            <div className="analytics-chart__labels">
+              <span>
+                {formatNumber(maxChartValue)}
+              </span>
+
+              <span>
+                {formatNumber(
+                  Math.round(
+                    maxChartValue * 0.5
+                  )
+                )}
+              </span>
+
+              <span>0</span>
+            </div>
+
+            <div className="analytics-chart__canvas">
+              <div className="analytics-chart__grid analytics-chart__grid--top" />
+              <div className="analytics-chart__grid analytics-chart__grid--middle" />
+              <div className="analytics-chart__grid analytics-chart__grid--bottom" />
+
+              <svg
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                className="analytics-chart__svg"
+                aria-label="Traffic over the last 30 days"
+              >
+                <defs>
+                  <linearGradient
+                    id="trafficGradient"
+                    x1="0"
+                    x2="0"
+                    y1="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="0%"
+                      stopColor="currentColor"
+                      stopOpacity="0.22"
+                    />
+
+                    <stop
+                      offset="100%"
+                      stopColor="currentColor"
+                      stopOpacity="0"
+                    />
+                  </linearGradient>
+                </defs>
+
+                {chartAreaPoints && (
+                  <polygon
+                    points={
+                      chartAreaPoints
+                    }
+                    className="analytics-chart__area"
+                    fill="url(#trafficGradient)"
                   />
+                )}
 
-                  <stop
-                    offset="100%"
-                    stopColor="#6da36b"
-                    stopOpacity="0.02"
+                {chartPoints && (
+                  <polyline
+                    points={chartPoints}
+                    className="analytics-chart__line"
+                    vectorEffect="non-scaling-stroke"
                   />
-                </linearGradient>
-              </defs>
-
-              {chartAreaPoints && (
-                <polygon
-                  points={
-                    chartAreaPoints
-                  }
-                  fill="url(#analyticsArea)"
-                />
-              )}
-
-              <polyline
-                points={chartPoints}
-                fill="none"
-                stroke="#34794c"
-                strokeWidth="2.25"
-                vectorEffect="non-scaling-stroke"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
-            </svg>
+                )}
+              </svg>
+            </div>
           </div>
 
           <div className="analytics-chart__dates">
@@ -1396,600 +1507,806 @@ export default async function AnalyticsPage() {
             </span>
 
             <span>
+              {formatShortDate(
+                new Date(
+                  thirtyDaysAgo.getTime() +
+                    14 *
+                      24 *
+                      60 *
+                      60 *
+                      1000
+                )
+              )}
+            </span>
+
+            <span>
               {formatShortDate(now)}
             </span>
           </div>
+
+          <div className="analytics-traffic-summary">
+            <div>
+              <span className="analytics-traffic-summary__label">
+                Today
+              </span>
+
+              <strong>
+                {formatNumber(
+                  todayViews
+                )}
+              </strong>
+            </div>
+
+            <div>
+              <span className="analytics-traffic-summary__label">
+                Last 30 days
+              </span>
+
+              <strong>
+                {formatNumber(
+                  thirtyDayViews
+                )}
+              </strong>
+            </div>
+
+            <div>
+              <span className="analytics-traffic-summary__label">
+                All time
+              </span>
+
+              <strong>
+                {formatNumber(
+                  totalViews
+                )}
+              </strong>
+            </div>
+          </div>
         </article>
 
-        <article className="analytics-card">
+        {/* TOP CONTENT */}
+
+        <article className="analytics-card analytics-top-content-card">
           <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
                 Top Content
               </h2>
 
-              <p className="analytics-card__description">
-                Best-performing content
+              <p className="analytics-card__subtitle">
+                Most viewed content in the last 30 days
               </p>
             </div>
-
-            <span className="analytics-card__pill">
-              30 DAYS
-            </span>
           </div>
 
-          <div className="analytics-table">
-            <div className="analytics-table__head">
-              <div>Content</div>
-              <div>Type</div>
-              <div
-                style={{
-                  textAlign: "right",
-                }}
-              >
-                Views
+          <div className="analytics-top-content">
+            {topContent.length ===
+            0 ? (
+              <div className="analytics-empty">
+                No content activity yet.
               </div>
-              <div
-                style={{
-                  textAlign: "right",
-                }}
-              >
-                Likes
-              </div>
-            </div>
-
-            {topContent.map(
-              (item, index) => (
-                <div
-                  key={item.id}
-                  className="analytics-table__row"
-                >
-                  <div className="analytics-table__content">
-                    <div className="analytics-table__rank">
+            ) : (
+              topContent.map(
+                (item, index) => (
+                  <div
+                    key={item.id}
+                    className="analytics-content-row"
+                  >
+                    <div className="analytics-content-row__rank">
                       {index + 1}
                     </div>
 
-                    <div className="analytics-table__copy">
-                      <div className="analytics-table__title">
-                        {item.title}
+                    <div className="analytics-content-row__main">
+                      <div className="analytics-content-row__title-line">
+                        <span className="analytics-content-row__title">
+                          {item.title}
+                        </span>
+
+                        <span
+                          className={contentTypeClass(
+                            item.type
+                          )}
+                        >
+                          {contentTypeLabel(
+                            item.type
+                          )}
+                        </span>
                       </div>
 
-                      <div className="analytics-table__meta">
-                        {formatNumber(
-                          item.comments
-                        )}{" "}
-                        comments
+                      <div className="analytics-content-row__stats">
+                        <span>
+                          ◉{" "}
+                          {formatNumber(
+                            item.views
+                          )}{" "}
+                          views
+                        </span>
+
+                        <span>
+                          ♥{" "}
+                          {formatNumber(
+                            item.likes
+                          )}
+                        </span>
+
+                        <span>
+                          ●{" "}
+                          {formatNumber(
+                            item.comments
+                          )}
+                        </span>
                       </div>
                     </div>
                   </div>
-
-                  <div>
-                    <span
-                      className={contentTypeClass(
-                        item.type
-                      )}
-                    >
-                      {contentTypeLabel(
-                        item.type
-                      )}
-                    </span>
-                  </div>
-
-                  <div className="analytics-table__number">
-                    {formatNumber(
-                      item.views
-                    )}
-                  </div>
-
-                  <div className="analytics-table__number analytics-table__number--soft">
-                    {formatNumber(
-                      item.likes
-                    )}
-                  </div>
-                </div>
+                )
               )
             )}
           </div>
         </article>
       </section>
 
-      {/* COMMENTS + MESSAGES */}
+      {/* COMMENTS / LEADS / MESSAGES */}
 
       <section className="analytics-communication-grid">
         <article className="analytics-card">
           <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
-                Recent Comments
+                Latest Comments
               </h2>
 
-              <p className="analytics-card__description">
-                Latest community
-                conversations
+              <p className="analytics-card__subtitle">
+                Recent community activity
               </p>
             </div>
 
-            <span className="analytics-card__pill">
+            <span className="analytics-card__count">
               {formatNumber(
                 totalComments
-              )}{" "}
-              TOTAL
+              )}
             </span>
           </div>
 
-          {recentComments.length ===
-          0 ? (
-            <div className="analytics-inbox-empty">
-              <div className="analytics-inbox-empty__icon">
-                ●
+          <div className="analytics-feed">
+            {recentComments.length ===
+            0 ? (
+              <div className="analytics-empty">
+                No comments yet.
               </div>
+            ) : (
+              recentComments.map(
+                (comment) => {
+                  const contentItem =
+                    contentMap.get(
+                      comment.content_item_id
+                    );
 
-              <strong>
-                No comments yet
-              </strong>
+                  const profile =
+                    profileMap.get(
+                      comment.user_id
+                    );
 
-              <p>
-                New community comments
-                will appear here.
-              </p>
-            </div>
-          ) : (
-            recentComments
-              .slice(0, 4)
-              .map((comment) => {
-                const contentItem =
-                  contentMap.get(
-                    comment.content_item_id
-                  );
+                  const displayName =
+                    profile?.display_name ||
+                    "Member";
 
-                const profile =
-                  profileMap.get(
-                    comment.user_id
-                  );
+                  return (
+                    <div
+                      key={comment.id}
+                      className="analytics-feed-item"
+                    >
+                      <div className="analytics-avatar">
+                        {getInitials(
+                          displayName
+                        )}
+                      </div>
 
-                const commenterName =
-                  profile?.display_name?.trim() ||
-                  "Member";
-
-                return (
-                  <div
-                    key={comment.id}
-                    className="analytics-comment"
-                  >
-                    <div className="analytics-avatar">
-                      {getInitials(
-                        commenterName
-                      )}
-                    </div>
-
-                    <div className="analytics-comment__body">
-                      <div className="analytics-comment__top">
-                        <div
-                          style={{
-                            minWidth: 0,
-                          }}
-                        >
-                          <div className="analytics-comment__name">
+                      <div className="analytics-feed-item__content">
+                        <div className="analytics-feed-item__top">
+                          <strong>
                             {
-                              commenterName
+                              displayName
                             }
-                          </div>
+                          </strong>
 
-                          <div className="analytics-comment__content-title">
-                            {contentItem
-                              ?.title ??
-                              `Content #${comment.content_item_id}`}
-                          </div>
+                          <span>
+                            {formatDate(
+                              comment.created_at
+                            )}
+                          </span>
                         </div>
 
-                        <div className="analytics-comment__date">
-                          {formatDate(
-                            comment.created_at
+                        <p>
+                          {truncate(
+                            comment.content,
+                            100
                           )}
-                        </div>
-                      </div>
+                        </p>
 
-                      <p className="analytics-comment__text">
-                        “
-                        {truncate(
-                          comment.content,
-                          120
-                        )}
-                        ”
-                      </p>
-
-                      <div className="analytics-comment__statuses">
-                        {comment.is_hidden ? (
-                          <span className="analytics-status analytics-status--hidden">
-                            HIDDEN
-                          </span>
-                        ) : (
-                          <span className="analytics-status analytics-status--visible">
-                            VISIBLE
-                          </span>
-                        )}
-
-                        {comment.is_pinned && (
-                          <span className="analytics-status analytics-status--pinned">
-                            PINNED
-                          </span>
+                        {contentItem && (
+                          <small>
+                            On:{" "}
+                            {
+                              contentItem.title
+                            }
+                          </small>
                         )}
                       </div>
                     </div>
-                  </div>
-                );
-              })
-          )}
+                  );
+                }
+              )
+            )}
+          </div>
         </article>
 
         <article className="analytics-card">
           <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
-                Messages & Leads
+                Join Our Team Leads
               </h2>
 
-              <p className="analytics-card__description">
-                Website enquiries and
-                opportunities
+              <p className="analytics-card__subtitle">
+                Latest opportunity inquiries
               </p>
             </div>
 
-            {unreadMessages +
-              unreadLeads >
-              0 && (
-              <span className="analytics-kpi__badge">
-                {unreadMessages +
-                  unreadLeads}
+            {unreadLeads > 0 && (
+              <span className="analytics-unread-pill">
+                {unreadLeads} new
               </span>
             )}
           </div>
 
-          {recentMessages.length ===
-            0 &&
-          recentLeads.length ===
+          <div className="analytics-feed">
+            {recentLeads.length ===
             0 ? (
-            <div className="analytics-inbox-empty">
-              <div className="analytics-inbox-empty__icon">
-                ✉
+              <div className="analytics-empty">
+                No leads yet.
               </div>
+            ) : (
+              recentLeads.map(
+                (lead) => (
+                  <div
+                    key={lead.id}
+                    className={`analytics-feed-item ${
+                      !lead.is_read
+                        ? "analytics-feed-item--unread"
+                        : ""
+                    }`}
+                  >
+                    <div className="analytics-avatar analytics-avatar--lead">
+                      {getInitials(
+                        lead.name
+                      )}
+                    </div>
 
-              <strong>
-                Inbox is clear
-              </strong>
+                    <div className="analytics-feed-item__content">
+                      <div className="analytics-feed-item__top">
+                        <strong>
+                          {lead.name}
+                        </strong>
 
-              <p>
-                New website messages and
-                Join Our Team leads will
-                appear here.
+                        <span>
+                          {formatDate(
+                            lead.created_at
+                          )}
+                        </span>
+                      </div>
+
+                      {lead.subject && (
+                        <small className="analytics-feed-item__subject">
+                          {lead.subject}
+                        </small>
+                      )}
+
+                      {lead.message && (
+                        <p>
+                          {truncate(
+                            lead.message,
+                            100
+                          )}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )
+              )
+            )}
+          </div>
+        </article>
+
+        <article className="analytics-card">
+          <div className="analytics-card__header">
+            <div>
+              <h2 className="analytics-card__title">
+                Messages
+              </h2>
+
+              <p className="analytics-card__subtitle">
+                Latest contact messages
               </p>
             </div>
-          ) : (
-            <>
-              {recentMessages
-                .slice(0, 4)
-                .map((message) => (
+
+            {unreadMessages >
+              0 && (
+              <span className="analytics-unread-pill">
+                {unreadMessages} unread
+              </span>
+            )}
+          </div>
+
+          <div className="analytics-feed">
+            {recentMessages.length ===
+            0 ? (
+              <div className="analytics-empty">
+                No messages yet.
+              </div>
+            ) : (
+              recentMessages.map(
+                (message) => (
                   <div
-                    key={`message-${message.id}`}
-                    className="analytics-inbox-item"
+                    key={message.id}
+                    className={`analytics-feed-item ${
+                      !message.is_read
+                        ? "analytics-feed-item--unread"
+                        : ""
+                    }`}
                   >
-                    <span
-                      className={
-                        message.is_read
-                          ? "analytics-inbox-dot"
-                          : "analytics-inbox-dot analytics-inbox-dot--new"
-                      }
-                    />
+                    <div className="analytics-avatar analytics-avatar--message">
+                      {getInitials(
+                        message.name
+                      )}
+                    </div>
 
-                    <div
-                      style={{
-                        minWidth: 0,
-                      }}
-                    >
-                      <div className="analytics-inbox-item__name">
-                        {message.name}
-                      </div>
+                    <div className="analytics-feed-item__content">
+                      <div className="analytics-feed-item__top">
+                        <strong>
+                          {
+                            message.name
+                          }
+                        </strong>
 
-                      <div className="analytics-inbox-item__subject">
-                        {message.subject ||
-                          truncate(
-                            message.message,
-                            70
+                        <span>
+                          {formatDate(
+                            message.created_at
                           )}
+                        </span>
                       </div>
 
-                      <div className="analytics-inbox-item__type">
-                        Message · To{" "}
+                      <small className="analytics-feed-item__subject">
+                        To:{" "}
                         {recipientLabel(
                           message.recipient
                         )}
-                      </div>
-                    </div>
+                        {message.subject
+                          ? ` · ${message.subject}`
+                          : ""}
+                      </small>
 
-                    <div className="analytics-inbox-item__date">
-                      {formatDate(
-                        message.created_at
-                      )}
-                    </div>
-                  </div>
-                ))}
-
-              {recentLeads
-                .slice(0, 3)
-                .map((lead) => (
-                  <div
-                    key={`lead-${lead.id}`}
-                    className="analytics-inbox-item"
-                  >
-                    <span
-                      className={
-                        lead.is_read
-                          ? "analytics-inbox-dot"
-                          : "analytics-inbox-dot analytics-inbox-dot--lead"
-                      }
-                    />
-
-                    <div
-                      style={{
-                        minWidth: 0,
-                      }}
-                    >
-                      <div className="analytics-inbox-item__name">
-                        {lead.name}
-                      </div>
-
-                      <div className="analytics-inbox-item__subject">
-                        {lead.subject ||
-                          lead.message ||
-                          "Join Our Team lead"}
-                      </div>
-
-                      <div className="analytics-inbox-item__type analytics-inbox-item__type--lead">
-                        LEAD
-                      </div>
-                    </div>
-
-                    <div className="analytics-inbox-item__date">
-                      {formatDate(
-                        lead.created_at
-                      )}
+                      <p>
+                        {truncate(
+                          message.message,
+                          100
+                        )}
+                      </p>
                     </div>
                   </div>
-                ))}
-            </>
-          )}
+                )
+              )
+            )}
+          </div>
         </article>
       </section>
 
-      {/* BOTTOM ROW */}
+      {/* SALES AND CONVERSIONS */}
 
       <section className="analytics-bottom-grid">
         <article className="analytics-card analytics-bottom-card">
-          <div className="analytics-bottom-card__header">
+          <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
-                Sales & Conversions
+                Sales &amp; Conversions
               </h2>
 
-              <p className="analytics-card__description">
+              <p className="analytics-card__subtitle">
                 14-Day Energy Reset
               </p>
             </div>
 
-            <span className="analytics-card__pill">
+            <span className="analytics-revenue-pill">
               {formatMoney(
-                totalRevenue
+                energyResetRevenue
               )}
             </span>
           </div>
 
-          <div className="analytics-funnel-metrics">
-            <div className="analytics-funnel-metric">
-              <div className="analytics-funnel-metric__label">
-                Views
+          <div className="analytics-funnel">
+            <div className="analytics-funnel-metrics">
+              <div>
+                <strong>
+                  {formatNumber(
+                    energyResetViews
+                  )}
+                </strong>
+                <span>Views</span>
               </div>
 
-              <div className="analytics-funnel-metric__value">
-                {formatNumber(
-                  energyResetViews
-                )}
-              </div>
-            </div>
-
-            <div className="analytics-funnel-metric analytics-funnel-metric--checkout">
-              <div className="analytics-funnel-metric__label">
-                Buy Clicks
-              </div>
-
-              <div className="analytics-funnel-metric__value">
-                {formatNumber(
-                  buyClicks
-                )}
-              </div>
-            </div>
-
-            <div className="analytics-funnel-metric analytics-funnel-metric--sales">
-              <div className="analytics-funnel-metric__label">
-                Sales
+              <div>
+                <strong>
+                  {formatNumber(
+                    energyResetBuyClicks
+                  )}
+                </strong>
+                <span>
+                  Buy Clicks
+                </span>
               </div>
 
-              <div className="analytics-funnel-metric__value">
-                {formatNumber(
-                  purchases.length
-                )}
+              <div>
+                <strong>
+                  {formatNumber(
+                    energyResetPurchases.length
+                  )}
+                </strong>
+                <span>Sales</span>
               </div>
             </div>
-          </div>
 
-          <div className="analytics-funnel-line">
-            <span className="analytics-funnel-line__dot" />
-            <span className="analytics-funnel-line__bar" />
+            <div className="analytics-funnel-line">
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+              <span className="analytics-funnel-segment" />
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+              <span className="analytics-funnel-segment" />
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+            </div>
 
-            <span className="analytics-funnel-line__dot analytics-funnel-line__dot--checkout" />
-            <span className="analytics-funnel-line__bar" />
-
-            <span className="analytics-funnel-line__dot analytics-funnel-line__dot--sales" />
-          </div>
-
-          <div className="analytics-funnel-note">
-            Checkout tracking was enabled
-            after page-view and purchase
-            tracking. Historical purchases
-            are shown for reference, so a
-            conversion rate is not
-            displayed yet.
+            <div className="analytics-funnel-note">
+              <strong>
+                Revenue:{" "}
+                {formatMoney(
+                  energyResetRevenue
+                )}
+              </strong>
+              <span>
+                Historical purchases
+                are shown separately
+                from newer buy-click
+                tracking.
+              </span>
+            </div>
           </div>
         </article>
 
         <article className="analytics-card analytics-bottom-card">
-          <div className="analytics-bottom-card__header">
+          <div className="analytics-card__header">
+            <div>
+              <h2 className="analytics-card__title">
+                Sales &amp; Conversions
+              </h2>
+
+              <p className="analytics-card__subtitle">
+                The 14-Day Eat Better
+                Reset Plan
+              </p>
+            </div>
+
+            <span className="analytics-revenue-pill">
+              {formatMoney(
+                eatBetterResetRevenue
+              )}
+            </span>
+          </div>
+
+          <div className="analytics-funnel">
+            <div className="analytics-funnel-metrics">
+              <div>
+                <strong>
+                  {formatNumber(
+                    eatBetterResetViews
+                  )}
+                </strong>
+                <span>Views</span>
+              </div>
+
+              <div>
+                <strong>
+                  {formatNumber(
+                    eatBetterResetBuyClicks
+                  )}
+                </strong>
+                <span>
+                  Buy Clicks
+                </span>
+              </div>
+
+              <div>
+                <strong>
+                  {formatNumber(
+                    eatBetterPurchases.length
+                  )}
+                </strong>
+                <span>Sales</span>
+              </div>
+            </div>
+
+            <div className="analytics-funnel-line">
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+              <span className="analytics-funnel-segment" />
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+              <span className="analytics-funnel-segment" />
+              <span className="analytics-funnel-dot analytics-funnel-dot--active" />
+            </div>
+
+            <div className="analytics-funnel-note">
+              <strong>
+                Revenue:{" "}
+                {formatMoney(
+                  eatBetterResetRevenue
+                )}
+              </strong>
+              <span>
+                Eat Better purchases
+                are tracked independently
+                from Energy Reset.
+              </span>
+            </div>
+          </div>
+        </article>
+                {/* WHERE PEOPLE ARE GOING */}
+
+        <article className="analytics-card analytics-bottom-card">
+          <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
                 Where People Are Going
               </h2>
 
-              <p className="analytics-card__description">
-                Most visited public pages
+              <p className="analytics-card__subtitle">
+                Most visited public pages in the last 30 days
               </p>
             </div>
           </div>
 
-          <div className="analytics-pages-list">
-            {topPages
-              .slice(0, 5)
-              .map(
-                (
-                  [path, count],
-                  index
-                ) => (
-                  <div
-                    key={path}
-                    className="analytics-page-row"
-                  >
-                    <div className="analytics-page-row__top">
-                      <span className="analytics-page-row__rank">
-                        {index + 1}
-                      </span>
+          <div className="analytics-page-list">
+            {topPages.length === 0 ? (
+              <div className="analytics-empty">
+                No page-view data yet.
+              </div>
+            ) : (
+              topPages.map(
+                ([path, count], index) => {
+                  const percentage =
+                    maxTopPageCount > 0
+                      ? Math.max(
+                          4,
+                          (count /
+                            maxTopPageCount) *
+                            100
+                        )
+                      : 0;
 
-                      <span className="analytics-page-row__name">
-                        {pageLabel(
-                          path
-                        )}
-                      </span>
+                  return (
+                    <div
+                      key={path}
+                      className="analytics-page-row"
+                    >
+                      <div className="analytics-page-row__top">
+                        <div className="analytics-page-row__name">
+                          <span className="analytics-page-row__rank">
+                            {index + 1}
+                          </span>
 
-                      <span className="analytics-page-row__count">
-                        {formatNumber(
-                          count
-                        )}
-                      </span>
+                          <span>
+                            {pageLabel(
+                              path
+                            )}
+                          </span>
+                        </div>
+
+                        <strong>
+                          {formatNumber(
+                            count
+                          )}
+                        </strong>
+                      </div>
+
+                      <div className="analytics-page-row__bar">
+                        <span
+                          style={{
+                            width: `${percentage}%`,
+                          }}
+                        />
+                      </div>
                     </div>
-
-                    <div className="analytics-page-row__track">
-                      <div
-                        className="analytics-page-row__bar"
-                        style={{
-                          width: `${Math.max(
-                            5,
-                            (count /
-                              maxTopPageCount) *
-                              100
-                          )}%`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                )
-              )}
+                  );
+                }
+              )
+            )}
           </div>
         </article>
 
-        <article className="analytics-card">
+        {/* RECENT ACTIVITY */}
+
+        <article className="analytics-card analytics-bottom-card">
           <div className="analytics-card__header">
             <div>
               <h2 className="analytics-card__title">
                 Recent Activity
               </h2>
 
-              <p className="analytics-card__description">
-                Latest public website
-                events
+              <p className="analytics-card__subtitle">
+                Latest website events
               </p>
             </div>
           </div>
 
           <div className="analytics-activity-list">
-            {recentEvents
-              .slice(0, 6)
-              .map((event) => (
-                <div
-                  key={event.id}
-                  className="analytics-activity"
-                >
-                  <span
-                    className={
-                      event.event_type ===
-                      "buy_click"
-                        ? "analytics-activity__dot analytics-activity__dot--checkout"
-                        : "analytics-activity__dot"
-                    }
-                  />
+            {recentEvents.length ===
+            0 ? (
+              <div className="analytics-empty">
+                No recent activity yet.
+              </div>
+            ) : (
+              recentEvents
+                .slice(0, 10)
+                .map((event) => {
+                  const contentItem =
+                    event.content_id
+                      ? contentMap.get(
+                          event.content_id
+                        )
+                      : null;
 
-                  <div
-                    style={{
-                      minWidth: 0,
-                    }}
-                  >
-                    <div className="analytics-activity__type">
-                      {eventLabel(
-                        event.event_type
-                      )}
-                    </div>
+                  let activityTitle =
+                    eventLabel(
+                      event.event_type
+                    );
 
-                    <div className="analytics-activity__page">
-                      {event.page_path
+                  let activityDetail =
+                    "";
+
+                  if (
+                    event.event_type ===
+                    "page_view"
+                  ) {
+                    activityTitle =
+                      "Page View";
+
+                    activityDetail =
+                      event.page_path
                         ? pageLabel(
-                            event.page_path
+                            normalizePath(
+                              event.page_path
+                            )
                           )
-                        : "Wonderful-Life"}
-                    </div>
-                  </div>
+                        : "Website";
+                  } else if (
+                    event.event_type ===
+                    "buy_click"
+                  ) {
+                    activityTitle =
+                      "Buy Click";
 
-                  <div className="analytics-activity__date">
-                    {formatDate(
-                      event.created_at
-                    )}
-                  </div>
-                </div>
-              ))}
+                    activityDetail =
+                      event.page_path
+                        ? pageLabel(
+                            normalizePath(
+                              event.page_path
+                            )
+                          )
+                        : "Product";
+                  } else if (
+                    contentItem
+                  ) {
+                    activityDetail =
+                      contentItem.title;
+                  } else if (
+                    event.page_path
+                  ) {
+                    activityDetail =
+                      pageLabel(
+                        normalizePath(
+                          event.page_path
+                        )
+                      );
+                  }
+
+                  return (
+                    <div
+                      key={event.id}
+                      className="analytics-activity-item"
+                    >
+                      <div className="analytics-activity-item__dot" />
+
+                      <div className="analytics-activity-item__content">
+                        <div className="analytics-activity-item__top">
+                          <strong>
+                            {
+                              activityTitle
+                            }
+                          </strong>
+
+                          <span>
+                            {formatDate(
+                              event.created_at
+                            )}
+                          </span>
+                        </div>
+
+                        {activityDetail && (
+                          <small>
+                            {
+                              activityDetail
+                            }
+                          </small>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+            )}
           </div>
         </article>
       </section>
 
-      <footer className="analytics-footer">
-        <span>
-          Wonderful-Life first-party
-          analytics
-        </span>
+      {/* FOOTER SUMMARY */}
 
-        <span>•</span>
+      <section className="analytics-summary-strip">
+        <div className="analytics-summary-strip__item">
+          <span>
+            Public Page Views
+          </span>
 
-        <span>Supabase</span>
+          <strong>
+            {formatNumber(
+              totalViews
+            )}
+          </strong>
+        </div>
 
-        <span>•</span>
+        <div className="analytics-summary-strip__divider" />
 
-        <span>
-          {formatNumber(
-            totalViews
-          )}{" "}
-          recorded public page views
-        </span>
+        <div className="analytics-summary-strip__item">
+          <span>
+            Total Sales
+          </span>
 
-        <span>•</span>
+          <strong>
+            {formatNumber(
+              purchases.length
+            )}
+          </strong>
+        </div>
 
-        <span>
-          Studio activity excluded
-        </span>
-      </footer>
+        <div className="analytics-summary-strip__divider" />
+
+        <div className="analytics-summary-strip__item">
+          <span>
+            Total Revenue
+          </span>
+
+          <strong>
+            {formatMoney(
+              totalRevenue
+            )}
+          </strong>
+        </div>
+
+        <div className="analytics-summary-strip__divider" />
+
+        <div className="analytics-summary-strip__item">
+          <span>
+            Eat Better Views
+          </span>
+
+          <strong>
+            {formatNumber(
+              eatBetterResetViews
+            )}
+          </strong>
+        </div>
+      </section>
     </div>
   );
 }

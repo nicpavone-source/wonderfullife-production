@@ -1,3 +1,6 @@
+"use client";
+
+import type { MouseEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,18 +9,61 @@ import Link from "next/link";
   Replace "#" with the Eat Better Stripe checkout URL
   only after the sales page is visually approved.
 */
+
 const CHECKOUT_URL =
   "https://buy.stripe.com/aFaaEQe3PaWf5nZ3be1gs04";
 
 export default function EatBetterResetPage() {
+  async function handleCheckout(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+
+    try {
+      await Promise.race([
+        fetch("/api/analytics/track", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event_type: "buy_click",
+            page_path: "/eat-better-reset",
+            content_id: null,
+            content_type: "digital_product",
+            source: "eat_better_reset",
+            metadata: {
+              product_name: "The 14-Day Eat Better Reset Plan",
+              price: 19,
+              currency: "CAD",
+              destination: "stripe_payment_link",
+            },
+          }),
+          keepalive: true,
+        }),
+
+        new Promise((resolve) =>
+          setTimeout(resolve, 1000)
+        ),
+      ]);
+    } catch (error) {
+      console.error(
+        "Unable to record Eat Better Reset buy click:",
+        error
+      );
+    } finally {
+      window.location.href = CHECKOUT_URL;
+    }
+  }
+
   return (
     <main className="eatBetterPage">
 
       {/* =========================================================
           HERO — LOCKED
       ========================================================= */}
+
       <section className="heroSection">
         <div className="heroFrame">
+
           <Image
             src="/eat-better-reset/ebcover.png"
             alt="The 14-Day Eat Better Reset"
@@ -29,63 +75,96 @@ export default function EatBetterResetPage() {
 
           <a
             href={CHECKOUT_URL}
+            onClick={handleCheckout}
             className="heroPriceButton"
             aria-label="Buy the 14-Day Eat Better Reset for $19 CAD"
           >
-            <span className="heroPrice">$19 CAD</span>
+            <span className="heroPrice">
+              $19 CAD
+            </span>
 
             <span className="heroBuy">
               BUY NOW <b>→</b>
             </span>
           </a>
+
         </div>
       </section>
 
       {/* =========================================================
           QUICK VALUE STRIP
       ========================================================= */}
+
       <section className="valueStrip">
         <div className="valueInner">
 
           <div className="valueItem">
-            <span className="valueNumber">01</span>
+            <span className="valueNumber">
+              01
+            </span>
 
             <div>
-              <strong>Instant Download</strong>
-              <span>Start whenever you&apos;re ready.</span>
+              <strong>
+                Instant Download
+              </strong>
+
+              <span>
+                Start whenever you&apos;re ready.
+              </span>
             </div>
           </div>
 
           <div className="valueDivider" />
 
           <div className="valueItem">
-            <span className="valueNumber">02</span>
+            <span className="valueNumber">
+              02
+            </span>
 
             <div>
-              <strong>Printable PDF</strong>
-              <span>Keep it close. Make it yours.</span>
+              <strong>
+                Printable PDF
+              </strong>
+
+              <span>
+                Keep it close. Make it yours.
+              </span>
             </div>
           </div>
 
           <div className="valueDivider" />
 
           <div className="valueItem">
-            <span className="valueNumber">03</span>
+            <span className="valueNumber">
+              03
+            </span>
 
             <div>
-              <strong>One-Time Payment</strong>
-              <span>No subscription. No recurring fee.</span>
+              <strong>
+                One-Time Payment
+              </strong>
+
+              <span>
+                No subscription. No recurring fee.
+              </span>
             </div>
           </div>
 
           <div className="valueDivider" />
 
           <div className="valueItem">
-            <span className="valueNumber">04</span>
+            <span className="valueNumber">
+              04
+            </span>
 
             <div>
-              <strong>Yours to Keep</strong>
-              <span>Return to the plan anytime.</span>
+              <strong>
+                Yours to Keep
+              </strong>
+
+              <span>
+                Return to the plan anytime.
+              </span>
             </div>
           </div>
 
@@ -95,6 +174,7 @@ export default function EatBetterResetPage() {
       {/* =========================================================
           TWO PRODUCT PREVIEWS
       ========================================================= */}
+
       <section className="insideSection">
 
         <div className="sectionHeading">
@@ -102,7 +182,9 @@ export default function EatBetterResetPage() {
             SEE WHAT&apos;S INSIDE
           </div>
 
-          <h2>Real guidance for real life.</h2>
+          <h2>
+            Real guidance for real life.
+          </h2>
 
           <p>
             Actual pages from the 14-Day Eat Better Reset.
@@ -112,6 +194,7 @@ export default function EatBetterResetPage() {
         <div className="previewGrid">
 
           {/* PREVIEW ONE */}
+
           <article className="previewCard">
 
             <div className="previewImageWrap">
@@ -125,7 +208,6 @@ export default function EatBetterResetPage() {
             </div>
 
             <div className="previewCopy">
-
               <span className="previewTag">
                 DAY 09
               </span>
@@ -138,12 +220,12 @@ export default function EatBetterResetPage() {
                 Simple, realistic guidance for satisfying,
                 energizing meals.
               </p>
-
             </div>
 
           </article>
 
           {/* PREVIEW TWO */}
+
           <article className="previewCard">
 
             <div className="previewImageWrap">
@@ -157,7 +239,6 @@ export default function EatBetterResetPage() {
             </div>
 
             <div className="previewCopy">
-
               <span className="previewTag">
                 PRACTICAL TOOL
               </span>
@@ -170,7 +251,6 @@ export default function EatBetterResetPage() {
                 A practical shopping companion for making
                 better choices easier.
               </p>
-
             </div>
 
           </article>
@@ -182,6 +262,7 @@ export default function EatBetterResetPage() {
       {/* =========================================================
           ADDITIONAL TOOLS
       ========================================================= */}
+
       <section className="toolsSection">
 
         <div className="toolsBox">
@@ -239,6 +320,7 @@ export default function EatBetterResetPage() {
       {/* =========================================================
           FINAL PURCHASE CTA
       ========================================================= */}
+
       <section className="finalCta">
 
         <div className="finalInner">
@@ -285,6 +367,7 @@ export default function EatBetterResetPage() {
 
             <a
               href={CHECKOUT_URL}
+              onClick={handleCheckout}
               className="finalBuyButton"
               aria-label="Buy the 14-Day Eat Better Reset for $19 CAD"
             >
@@ -295,13 +378,27 @@ export default function EatBetterResetPage() {
           </div>
 
           <div className="finalTrust">
-            <span>Instant digital download</span>
+            <span>
+              Instant digital download
+            </span>
+
             <b>•</b>
-            <span>Printable PDF</span>
+
+            <span>
+              Printable PDF
+            </span>
+
             <b>•</b>
-            <span>One-time payment</span>
+
+            <span>
+              One-time payment
+            </span>
+
             <b>•</b>
-            <span>Yours to keep</span>
+
+            <span>
+              Yours to keep
+            </span>
           </div>
 
         </div>
@@ -311,6 +408,7 @@ export default function EatBetterResetPage() {
       {/* =========================================================
           BACK HOME
       ========================================================= */}
+
       <div className="backHome">
         <Link href="/">
           ← Back to Wonderful-Life
@@ -320,8 +418,8 @@ export default function EatBetterResetPage() {
       {/* =========================================================
           STYLES
       ========================================================= */}
-      <style>{`
 
+      <style>{`
         :global(*) {
           box-sizing: border-box;
         }
@@ -709,7 +807,7 @@ export default function EatBetterResetPage() {
         }
 
         .previewTag {
-          display: inline-flex;
+                  display: inline-flex;
 
           min-height: 24px;
 
@@ -1459,7 +1557,6 @@ export default function EatBetterResetPage() {
             font-size: 10px;
           }
         }
-
       `}</style>
 
     </main>
