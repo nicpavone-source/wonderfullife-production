@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
 
 export const dynamic = "force-dynamic";
@@ -1374,10 +1375,17 @@ export default async function AnalyticsPage() {
               : unreadLeads;
 
           return (
-            <article
-              key={kpi.label}
-              className={`analytics-kpi analytics-kpi--${kpi.tone}`}
-            >
+           <Link
+  key={kpi.label}
+  href={kpi.label === "Messages" ? "/studio/messages" : "#"}
+  className={`analytics-kpi analytics-kpi--${kpi.tone}`}
+  style={{
+    textDecoration: "none",
+    color: "inherit",
+    cursor: kpi.label === "Messages" ? "pointer" : "default",
+    pointerEvents: kpi.label === "Messages" ? "auto" : "none",
+  }}
+>
               <div className="analytics-kpi__top">
                 <div className="analytics-kpi__icon">
                   {kpi.icon}
@@ -1401,7 +1409,7 @@ export default async function AnalyticsPage() {
               <div className="analytics-kpi__note">
                 {kpi.note}
               </div>
-            </article>
+            </Link>
           );
         })}
       </section>

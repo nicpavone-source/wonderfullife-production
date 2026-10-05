@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContactForm from "./ContactForm";
 
 export const metadata = {
   title: "Contact WonderfulLife | WonderfulLife.ca",
@@ -217,6 +218,12 @@ export default function ContactPage() {
           transform: scale(0.985);
         }
 
+        .wl-contact-submit:disabled {
+          cursor: wait;
+          opacity: 0.72;
+          transform: none;
+        }
+
         .wl-contact-privacy {
           margin: 3px 0 0;
           color: #89938c;
@@ -295,18 +302,11 @@ export default function ContactPage() {
           font-weight: 900;
         }
 
-        .wl-contact-email {
-          display: inline-flex;
-          margin-top: 7px;
-          color: #237343;
+        .wl-contact-person-note {
+          margin: 7px 0 0;
+          color: #718077;
           font-size: 13px;
-          font-weight: 800;
-          text-decoration: none;
-          word-break: break-word;
-        }
-
-        .wl-contact-email:hover {
-          text-decoration: underline;
+          line-height: 1.55;
         }
 
         .wl-contact-expectation {
@@ -314,7 +314,7 @@ export default function ContactPage() {
           padding: 22px 24px;
           border: 1px solid #dce6db;
           border-radius: 22px;
-          background: rgba(255,255,255,.76);
+          background: rgba(255, 255, 255, 0.76);
         }
 
         .wl-contact-expectation strong {
@@ -418,112 +418,12 @@ export default function ContactPage() {
             </h2>
 
             <p className="wl-contact-form-note">
-              Fill in the form below and your email program
-              will prepare the message for you.
+              Send your question through the form below.
+              Messages are reviewed by the Wonderful-Life
+              team before we respond.
             </p>
 
-            <form
-              className="wl-contact-form"
-              action="mailto:nick@wonderful-life.ca"
-              method="post"
-              encType="text/plain"
-            >
-              <div className="wl-contact-two-column">
-                <div className="wl-contact-field">
-                  <label htmlFor="contact-name">
-                    Your Name
-                  </label>
-
-                  <input
-                    id="contact-name"
-                    name="Name"
-                    type="text"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-
-                <div className="wl-contact-field">
-                  <label htmlFor="contact-email">
-                    Email Address
-                  </label>
-
-                  <input
-                    id="contact-email"
-                    name="Email"
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="wl-contact-field">
-                <label htmlFor="contact-subject">
-                  What can we help with?
-                </label>
-
-                <select
-                  id="contact-subject"
-                  name="Subject"
-                  defaultValue=""
-                  required
-                >
-                  <option value="" disabled>
-                    Choose a subject
-                  </option>
-
-                  <option value="WonderfulLife Question">
-                    WonderfulLife Question
-                  </option>
-
-                  <option value="Join Our Team">
-                    Join Our Team
-                  </option>
-
-                  <option value="USANA Opportunity">
-                    USANA Opportunity
-                  </option>
-
-                  <option value="Wellness or Nutrition">
-                    Wellness or Nutrition
-                  </option>
-
-                  <option value="Website Support">
-                    Website Support
-                  </option>
-
-                  <option value="Other">
-                    Other
-                  </option>
-                </select>
-              </div>
-
-              <div className="wl-contact-field">
-                <label htmlFor="contact-message">
-                  Message
-                </label>
-
-                <textarea
-                  id="contact-message"
-                  name="Message"
-                  placeholder="Tell us how we can help..."
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="wl-contact-submit"
-              >
-                Send Message →
-              </button>
-
-              <p className="wl-contact-privacy">
-                Your information is used only to respond
-                to your inquiry.
-              </p>
-            </form>
+            <ContactForm />
           </section>
 
           <aside>
@@ -553,12 +453,11 @@ export default function ContactPage() {
                     Zoey
                   </p>
 
-                  <a
-                    href="mailto:zoey@wonderful-life.ca"
-                    className="wl-contact-email"
-                  >
-                    zoey@wonderful-life.ca
-                  </a>
+                  <p className="wl-contact-person-note">
+                    Messages for Zoey can be sent through
+                    this form and are reviewed by the
+                    Wonderful-Life team.
+                  </p>
                 </div>
               </div>
             </div>

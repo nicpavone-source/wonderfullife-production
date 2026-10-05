@@ -102,7 +102,7 @@ export default function StatsPanel() {
             marginBottom: 10,
           }}
         >
-          ✨ Zoey's Idea of the Day
+          ✨ Zoey&apos;s Idea of the Day
         </p>
 
         <h3
