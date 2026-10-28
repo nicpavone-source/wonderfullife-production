@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 
 import ContentIntelligenceFields from "@/components/content/ContentIntelligenceFields";
 import FeaturedImageUpload from "@/components/studio/articles/FeaturedImageUpload";
-import RichTextEditor from "@/components/studio/articles/RichTextEditor";
+import RichTextEditor from "@/components/studio/articles/RichTextEditor.new";
 import { createContentAction } from "@/lib/actions/content";
 import { createClient } from "@/lib/supabase/server";
 
@@ -272,15 +272,16 @@ export default async function NewArticlePage() {
 
           {/* MAIN GRID */}
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "minmax(0, 1fr) minmax(300px, 360px)",
-              alignItems: "start",
-              gap: "24px",
-            }}
-          >
+         <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr)",
+    alignItems: "start",
+    gap: "24px",
+  }}
+>
+
+          
             {/* LEFT COLUMN */}
 
             <section
